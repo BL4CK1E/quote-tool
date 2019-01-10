@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start-all": "npm run start --prefix packages/api && npm run start --prefix packages/doc && npm run start --prefix packages/web"
+  }
+}
