@@ -1,22 +1,21 @@
-const connection = require('../db/db.js')
+const getRepository = require('typeorm').getRepository
 
 const createProposal = async proposal => {
 
-    let db = await connection()
-    let proposalRepository = db.getRepository("Proposal");
-        proposalRepository.save(proposal)
+    let proposalRepository = getRepository("Proposal");
+    let result = await proposalRepository.save(proposal)
             .then( savedProposal  => {
-
-                console.log("Proposal has been saved: ", savedProposal);
-                return proposalRepository.find();
-
+                return savedProposal
             })
-            .then( allPosts => {
-                console.log("All posts: ", allPosts);
+            .catch( err => {
+                return {
+                    message: "There was an issue saving the proposal",
+                    err: err
+                }
             });
+
+    return result
 
 }
 
-createProposal({
-    name: "Cloud Proposal"
-})
+module.exports = createProposal
