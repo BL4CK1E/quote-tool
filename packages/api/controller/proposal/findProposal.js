@@ -3,7 +3,7 @@ const getRepository = require('typeorm').getRepository
 const findProposal = async id => {
 
     let proposalRepository = getRepository("Proposal");
-    let result = await proposalRepository.findOneOrFail({ where: [ { id } ] })
+    let result = await proposalRepository.findOneOrFail({ where: [ { id } ] }, { relations: ["sections"] })
             .then( foundProposal  => {
                 return foundProposal
             })

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const connection = require('./db/db')
+const insertMockData = require('./controller/mock/mockData')
 
 const indexRouter = require('./routes/index')
 const proposalRouter = require('./routes/proposal')
@@ -20,5 +21,9 @@ app.use('/', indexRouter)
 app.use('/api/v1/proposal', proposalRouter)
 
 connection()
+
+setTimeout(()=>{
+  insertMockData()
+}, 2000)
 
 module.exports = app

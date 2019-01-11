@@ -21,5 +21,13 @@ module.exports = {
         updatedAt: {
             updateDate: true
         }
+    },
+    relations: {
+        sections: {
+            target: "Section",
+            type: "one-to-many",
+            cascades: true,
+            inverseSide: 'Proposal'
+        }
     }
 }
