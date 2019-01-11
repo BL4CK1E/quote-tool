@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const findProposal = require('../controller/findProposal')
-const findAllProposals = require('../controller/findAllProposals')
-const createProposal = require('../controller/createProposal')
-const updateProposal = require('../controller/updateProposal')
-const deleteProposal = require('../controller/deleteProposal')
+const findProposal = require('../controller/proposal/findProposal')
+const findAllProposals = require('../controller/proposal/findAllProposals')
+const createProposal = require('../controller/proposal/createProposal')
+const updateProposal = require('../controller/proposal/updateProposal')
+const deleteProposal = require('../controller/proposal/deleteProposal')
 
 // Find One Proposal
 router.get('/find-one/:id', async (req, res, next) => {
