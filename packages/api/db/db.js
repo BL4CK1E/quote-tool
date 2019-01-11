@@ -8,9 +8,10 @@ const connection = async () => {
         type: "postgres",
         host: "localhost",
         port: 5432,
-        username: "postgres",
-        password: "talke123",
+        username: "quote_tool_write_read",
+        password: "quote_tool",
         database: "quoteTool",
+        dropSchema: true,
         synchronize: true,
         entities: [
             new EntitySchema(require("../entity/proposal"))

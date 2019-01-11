@@ -1,18 +1,24 @@
-const express = require('express');
-const path = require('path');
+const express = require('express')
+const path = require('path')
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const bodyParser = require('body-parser')
+const logger = require('morgan')
+const connection = require('./db/db')
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index')
+const proposalRouter = require('./routes/proposal')
 
-const app = express();
+const app = express()
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter);
+app.use('/', indexRouter)
+app.use('/api/v1/proposal', proposalRouter)
 
-module.exports = app;
+connection()
+
+module.exports = app
