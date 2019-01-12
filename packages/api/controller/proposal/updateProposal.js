@@ -2,7 +2,7 @@ const getRepository = require('typeorm').getRepository
 
 const updateProposal = async proposal => {
 
-    let proposalRepository = getRepository("Proposal")
+    let proposalRepository = getRepository("proposal")
     let result = await proposalRepository.update( proposal.id, { name: proposal.name, description: proposal.description })
             .then( async ()  => {
                 let updatedProposal = await proposalRepository.findOne({ where: [ { id: proposal.id } ] })

@@ -9,7 +9,7 @@ const deleteProposal = require('../controller/proposal/deleteProposal')
 
 // Find One Proposal
 router.get('/find-one/:id', async (req, res, next) => {
-  let db_response = await findProposal(req.params.id)
+  let db_response = await findProposal(req.params.id, req.query.rel)
   res.json(db_response)
 })
 

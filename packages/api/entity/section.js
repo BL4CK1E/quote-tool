@@ -1,26 +1,32 @@
 module.exports = {
-    name: "Section",
+    name: "section",
     columns: {
         id: {
             primary: true,
             type: "int",
             generated: true
         },
-        title: {
+        name: {
             type: "varchar",
             length: 60,
             default: "New Section"
         },
         order: {
             type: "int"
+        },
+        proposal_id: {
+            type: "int",
         }
     },
     relations: {
       proposal: {
-          target: "Proposal",
+          target: "proposal",
           type: "many-to-one",
-          cascade: true,
-          joinColumn: true
+          joinColumn: {
+            name: "proposal_id",
+            referencedColumnName: "id"
+          },
+          primary: true
       }
   }
 }

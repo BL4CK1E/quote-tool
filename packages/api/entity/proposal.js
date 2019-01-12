@@ -1,5 +1,5 @@
 module.exports = {
-    name: "Proposal",
+    name: "proposal",
     columns: {
         id: {
             primary: true,
@@ -24,10 +24,11 @@ module.exports = {
     },
     relations: {
         sections: {
-            target: "Section",
+            target: "section",
             type: "one-to-many",
-            cascades: true,
-            inverseSide: 'Proposal'
+            primary: true,
+            cascade: true,
+            inverseSide: 'proposal'
         }
     }
 }

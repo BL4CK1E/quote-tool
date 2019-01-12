@@ -2,7 +2,7 @@ const getRepository = require('typeorm').getRepository
 
 const deleteProposal = async proposal => {
 
-    let proposalRepository = getRepository("Proposal");
+    let proposalRepository = getRepository("proposal");
     let result = await proposalRepository.findOneOrFail({ where: [ { id: proposal.id }, { name: proposal.name } ] })
             .then( foundProposal  => {
 

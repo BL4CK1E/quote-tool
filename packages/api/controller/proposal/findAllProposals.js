@@ -2,7 +2,7 @@ const getRepository = require('typeorm').getRepository
 
 const findAllProposals = async () => {
 
-    let proposalRepository = getRepository("Proposal");
+    let proposalRepository = getRepository("proposal");
     let result = await proposalRepository.find()
             .then( foundProposals  => {
                 return foundProposals

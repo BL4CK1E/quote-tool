@@ -2,7 +2,7 @@ const getRepository = require('typeorm').getRepository
 
 const createProposal = async proposal => {
 
-    let proposalRepository = getRepository("Proposal");
+    let proposalRepository = getRepository("proposal");
     let result = await proposalRepository.save(proposal)
             .then( savedProposal  => {
                 return savedProposal

@@ -1,10 +1,18 @@
 const getRepository = require('typeorm').getRepository
 
-const findProposal = async id => {
+const findSections = require('./section/findSections');
 
-    let proposalRepository = getRepository("Proposal");
-    let result = await proposalRepository.findOneOrFail({ where: [ { id } ] }, { relations: ["sections"] })
-            .then( foundProposal  => {
+const findProposal = async (id, rel) => {
+
+    let proposalRepository = getRepository("proposal");
+    let result = await proposalRepository.findOneOrFail({ where: [ { id } ] })
+            .then( async foundProposal  => {
+
+
+                if (rel !== null && rel) {
+                    foundProposal.sections = await findSections(id);
+                }
+
                 return foundProposal
             })
             .catch( err => {
