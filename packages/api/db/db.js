@@ -11,7 +11,7 @@ const connection = async () => {
         username: "quote_tool_write_read",
         password: "quote_tool",
         database: "quoteTool",
-        logging: ["query", "error"],
+        // logging: ["query", "error"],
         dropSchema: true,
         synchronize: true,
         entities: [

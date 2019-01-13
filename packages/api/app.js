@@ -8,6 +8,7 @@ const insertMockData = require('./controller/mock/mockData')
 
 const indexRouter = require('./routes/index')
 const proposalRouter = require('./routes/proposal')
+const sectionRouter = require('./routes/section')
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/api/v1/proposal', proposalRouter)
+app.use('/api/v1/section', sectionRouter)
 
 connection()
 

@@ -1,8 +1,14 @@
 const getRepository = require('typeorm').getRepository
 
-const updateProposal = async section => {
+const updateProposal = async sectionArray => {
 
     let sectionRepository = getRepository("section")
+
+    // Iterate Through Array
+      // INSIDE LOOP: Find Section, Update it and Save it Again
+      // INSIDE LOOP: Return Updated Sections
+    // Iterate again and sort by section.order, return out of function
+
     let result = await sectionRepository.update( section.id, { name: section.name, order: section.order })
             .then( async ()  => {
                 let sectionProposal = await sectionRepository.findOne({ where: [ { id: section.id } ] })
@@ -15,6 +21,7 @@ const updateProposal = async section => {
                 }
             })
     return result
+
 }
 
 module.exports = updateProposal

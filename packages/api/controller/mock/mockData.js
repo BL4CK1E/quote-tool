@@ -27,8 +27,8 @@ const insertMockData = async () => {
   }
   
   let proposal = {
-    name: "Cloud Proposal",
-    description: "Cloud Proposal for Lahey Constructions",
+    name: "Proposal 1",
+    description: "The first proposal, this is just for mocking the database insertion",
     sections: [
       section1, section2, section3, section4
     ] 
