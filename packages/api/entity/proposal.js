@@ -27,7 +27,6 @@ module.exports = {
             target: "section",
             type: "one-to-many",
             primary: true,
-            cascade: true,
             inverseSide: 'proposal'
         }
     }

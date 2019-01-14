@@ -47,7 +47,7 @@ const resolvers = {
   Proposal : {
 
     // Gets Sections based on Parent Proposal ID
-    sections: async ({ id } = root) => {
+    sections: async ( { id } ) => {
       let db_response = await findAllSections(id)
       return db_response
     }
@@ -77,21 +77,21 @@ const resolvers = {
 
     // Add Section
     addSection: async (root, section, context) => {
-      let db_response = await createSection(req.body)
+      let db_response = await createSection(section)
       res.json(db_response)
     },
 
     // Update Section
     updateSection: async (root, section, context) => {
-      let db_response = await updateSection(req.body)
+      let db_response = await updateSection(section)
       res.json(db_response)
     },
 
-    // Update Sections
-    updateSections: async (root, section, context) => {
-      let db_response = await updateSections(req.body)
-      res.json(db_response)
-    },
+    // Delete Proposal
+    deleteSection: async (root, section, context) => {
+      let db_response = await deleteSection(section)
+      return db_response
+    }
 
   }
 

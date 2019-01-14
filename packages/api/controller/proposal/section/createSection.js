@@ -2,8 +2,6 @@ const getRepository = require('typeorm').getRepository
 
 const createSection = async Section => {
 
-    console.log(Section)
-
     let sectionRepository = getRepository("section");
     let result = await sectionRepository.save(Section)
             .then( savedSection  => {
