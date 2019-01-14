@@ -11,10 +11,12 @@ const connection = async () => {
         username: "quote_tool_write_read",
         password: "quote_tool",
         database: "quoteTool",
+        // logging: ["query", "errors"],
         dropSchema: true,
         synchronize: true,
         entities: [
-            new EntitySchema(require("../entity/proposal"))
+            new EntitySchema(require("../entity/proposal")),
+            new EntitySchema(require("../entity/section"))
         ]
     })
 

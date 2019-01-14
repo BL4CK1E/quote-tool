@@ -5,20 +5,34 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const connection = require('./db/db')
 
-const indexRouter = require('./routes/index')
-const proposalRouter = require('./routes/proposal')
+// Apollo Imports
+const { ApolloServer } = require('apollo-server-express')
+const typeDefs = require('./types/index')
+const resolvers = require('./resolvers/index')
 
+// Mock Data Function
+const insertMockData = require('./controller/mock/mockData')
+
+// Express Instance
 const app = express()
 
+// Express Middleware
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter)
-app.use('/api/v1/proposal', proposalRouter)
-
+// DB Connection
 connection()
+setTimeout(()=>{
+  insertMockData()
+}, 2000)
+
+// Apollo Instance
+const server = new ApolloServer({ typeDefs, resolvers })
+
+// Apollo Middleware
+server.applyMiddleware({ app, server, path: '/___gql'})
 
 module.exports = app
