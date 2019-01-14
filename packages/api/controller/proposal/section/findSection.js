@@ -5,16 +5,16 @@ const getRepository = require('typeorm').getRepository
     Not specific to a proposal.
 */
 
-const findAllSections = async (id) => {
+const findSection = async (id) => {
 
     let sectionRepository = getRepository("section");
-    let result = await sectionRepository.findOneOrFail({ where: [{ id: id}] })
+    let result = await sectionRepository.findOneOrFail({ where: [ { id } ] })
             .then( foundSections  => {
                 return foundSections
             })
             .catch( err => {
                 return {
-                    message: "There was an issue retrieving all sections",
+                    message: `There was an issue retrieving section ${id}`,
                     err: err
                 }
             });
@@ -23,4 +23,4 @@ const findAllSections = async (id) => {
 
 }
 
-module.exports = findAllSections
+module.exports = findSection

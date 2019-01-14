@@ -2,11 +2,21 @@ const getRepository = require('typeorm').getRepository
 
 const updateProposal = async proposal => {
 
+    console.log(proposal)
+
     let proposalRepository = getRepository("proposal")
-    let result = await proposalRepository.update( proposal.id, { name: proposal.name, description: proposal.description })
-            .then( async ()  => {
-                let updatedProposal = await proposalRepository.findOne({ where: [ { id: proposal.id } ] })
-                return updatedProposal
+    let result = await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
+            .then( async (foundProposal)  => {
+
+                // Make Changes
+                foundProposal.name = proposal.name
+                foundProposal.description = proposal.description
+
+                // Save Changes
+                await proposalRepository.save(foundProposal)
+
+                // Find Changed Entry and Return It
+                return await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
             })
             .catch( err => {
                 return {

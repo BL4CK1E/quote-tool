@@ -36,7 +36,7 @@ const insertMockData = async () => {
 
   let result = await createProposal(proposal)
 
-  console.log(result)
+  console.log("[mockData.js] mock data inserted!")
 
 }
 
