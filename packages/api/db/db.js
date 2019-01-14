@@ -15,6 +15,7 @@ const connection = async () => {
         dropSchema: true,
         synchronize: true,
         entities: [
+            new EntitySchema(require("../entity/product")),
             new EntitySchema(require("../entity/proposal")),
             new EntitySchema(require("../entity/section"))
         ]

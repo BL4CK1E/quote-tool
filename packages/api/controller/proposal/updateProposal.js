@@ -18,11 +18,8 @@ const updateProposal = async proposal => {
                 // Find Changed Entry and Return It
                 return await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
             })
-            .catch( err => {
-                return {
-                    message: "There was an issue with updating the proposal",
-                    err: err
-                }
+            .catch( () => {
+                throw new Error(`There was an issue updating the proposal with an id of ${id}.`)
             })
     return result
 }

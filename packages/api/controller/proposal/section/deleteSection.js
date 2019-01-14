@@ -9,10 +9,7 @@ const deleteSection = async section => {
                 return foundSection
             })
             .catch( err => {
-                return {
-                    message: "There was an issue with deleting the section",
-                    err: err
-                }
+                throw new Error(`There was an issue deleting the section with an id of ${id}.`)
             });
 
     return result

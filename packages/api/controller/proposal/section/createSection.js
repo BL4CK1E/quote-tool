@@ -9,10 +9,7 @@ const createSection = async Section => {
                 return savedSection
             })
             .catch( err => {
-                return {
-                    message: "There was an issue saving the section",
-                    err: err
-                }
+                throw new Error(`There was an issue saving the section.`)
             });
     return result
 

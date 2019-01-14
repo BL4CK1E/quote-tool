@@ -15,10 +15,7 @@ const createSections = async (Section_Array, Proposal_Id) => {
                 return savedSection
             })
             .catch( err => {
-                return {
-                    message: "There was an issue saving the sections",
-                    err: err
-                }
+                throw new Error(`There was an issue saving the proposal.`)
             });
 
     return result

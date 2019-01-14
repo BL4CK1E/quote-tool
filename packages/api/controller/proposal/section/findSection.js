@@ -13,10 +13,7 @@ const findSection = async (id) => {
                 return foundSections
             })
             .catch( err => {
-                return {
-                    message: `There was an issue retrieving section ${id}`,
-                    err: err
-                }
+                throw new Error(`There was an issue retrieving the section with an id of ${id}.`)
             });
 
     return result

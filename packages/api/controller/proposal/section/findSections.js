@@ -13,10 +13,7 @@ const findAllSections = async (id) => {
                 return foundSections
             })
             .catch( err => {
-                return {
-                    message: "There was an issue retrieving all sections",
-                    err: err
-                }
+                throw new Error(`There was an issue retrieving sections assoicated to the proposal with an id of ${id}.`)
             });
 
     return result

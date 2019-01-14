@@ -14,11 +14,8 @@ const createProposal = async proposal => {
 
                 return savedProposal
             })
-            .catch( err => {
-                return {
-                    message: "There was an issue saving the proposal",
-                    err: err
-                }
+            .catch( () => {
+                throw new Error(`There was an issue saving the proposal.`)
             });
 
     return result

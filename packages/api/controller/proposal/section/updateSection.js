@@ -9,10 +9,7 @@ const updateProposal = async section => {
                 return sectionProposal
             })
             .catch( err => {
-                return {
-                    message: "There was an issue with updating the proposal",
-                    err: err
-                }
+                throw new Error(`There was an issue updating the section.`)
             })
     return result
 }
