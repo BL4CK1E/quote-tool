@@ -1,9 +1,11 @@
+// Proposal Controller Imports
 const findAllProposals = require('../controller/proposal/findAllProposals')
 const findProposal = require('../controller/proposal/findProposal')
 const createProposal = require('../controller/proposal/createProposal')
 const updateProposal = require('../controller/proposal/updateProposal')
 const deleteProposal = require('../controller/proposal/deleteProposal')
 
+// Section Controller Imports
 const findAllSections = require('../controller/proposal/section/findSections')
 const findSection = require('../controller/proposal/section/findSection')
 const createSection = require('../controller/proposal/section/createSection')
@@ -78,13 +80,13 @@ const resolvers = {
     // Add Section
     addSection: async (root, section, context) => {
       let db_response = await createSection(section)
-      res.json(db_response)
+      return(db_response)
     },
 
     // Update Section
     updateSection: async (root, section, context) => {
       let db_response = await updateSection(section)
-      res.json(db_response)
+      return(db_response)
     },
 
     // Delete Proposal

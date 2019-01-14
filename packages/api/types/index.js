@@ -43,7 +43,6 @@ const typeDefs = gql`
 
     # Section Mutations
     addSection( name: String!, order: Int!, proposal_id: Int! ): Section
-    createSection( name: String!, order: Int!, proposal_id: Int! ): Section
     updateSection( name: String, order: Int, proposal_id: Int! ): Section
     deleteSection( id: Int! ): Section
 

@@ -7,11 +7,8 @@ const findAllProposals = async () => {
             .then( foundProposals  => {
                 return foundProposals
             })
-            .catch( err => {
-                return {
-                    message: "There was an issue retrieving all proposals",
-                    err: err
-                }
+            .catch( () => {
+                throw new Error(`There was an issue retrieving all proposals.`)
             });
 
     return result
