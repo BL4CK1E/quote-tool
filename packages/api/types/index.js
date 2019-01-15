@@ -18,6 +18,22 @@ const typeDefs = gql`
     proposal_id: Int
   }
 
+  type Product {
+    id: Int
+    name: String
+    description: String
+    sku: String
+    mpn: String
+    cost: Float
+    sell: Float
+    rrp: Float
+    "Recurring Values (Default: 1): 1 = Upfront  2 = Monthly 3 = Annual"
+    recurring: Int
+    "Status Flag (Default: 1): 1 = Active 2 = Inactive"
+    status: Int
+  }
+
+  # Queries
   type Query {
 
     # Proposal Queries
@@ -28,12 +44,38 @@ const typeDefs = gql`
     Sections( id: Int! ): [Section]
     Section( id: Int! ): Section
 
+    # Product Queries
+    Products( status: Int ): [Product]
+    Product( id: Int!, status: Int): Product
+
   }
 
+  # Inputs (Reusable Arguments)
   input SectionInput {
-    name: String!
+    name: String! 
+    order: Int!
+    proposal_id: Int!
   }
 
+  input ProductInput {
+    "Product ID: Required to find a product"
+    id: Int
+    "Product Name"
+    name: String
+    "Product Description"
+    description: String
+    sku: String
+    mpn: String
+    cost: Float 
+    sell: Float 
+    rrp: Float 
+    "Recurring Values (Default: 1): 1 = Upfront  2 = Monthly 3 = Annual "
+    recurring: Int
+    "Status Flag (Default: 1): 1 = Active 2 = Inactive"
+    status: Int
+  }
+
+  # Mutations
   type Mutation {
 
     # Proposal Mutations
@@ -42,9 +84,13 @@ const typeDefs = gql`
     deleteProposal( id: Int!, name: String! ): Proposal
 
     # Section Mutations
-    addSection( name: String!, order: Int!, proposal_id: Int! ): Section
-    updateSection( name: String, order: Int, proposal_id: Int! ): Section
+    addSection( data: SectionInput ): Section
+    updateSection( data: SectionInput ): Section
     deleteSection( id: Int! ): Section
+
+    # Product Mutation
+    addProducts( products: [ProductInput] ): [Product]
+    updateProduct( product: ProductInput ): Product
 
   }
 

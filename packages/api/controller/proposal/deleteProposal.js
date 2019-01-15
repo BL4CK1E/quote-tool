@@ -9,10 +9,7 @@ const deleteProposal = async proposal => {
                 return foundProposal
             })
             .catch( err => {
-                return {
-                    message: "There was an issue with deleting the proposal",
-                    err: err
-                }
+                throw new Error(`There was an issue deleting the proposal with an id of ${id}.`)
             });
 
     return result

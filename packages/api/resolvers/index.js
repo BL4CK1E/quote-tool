@@ -10,8 +10,13 @@ const findAllSections = require('../controller/proposal/section/findSections')
 const findSection = require('../controller/proposal/section/findSection')
 const createSection = require('../controller/proposal/section/createSection')
 const updateSection = require('../controller/proposal/section/updateSection')
-const updateSections = require('../controller/proposal/section/updateSections')
 const deleteSection = require('../controller/proposal/section/deleteSection')
+
+// Product Controller Imports
+const findAllProducts = require('../controller/product/findAllProducts')
+const findProduct = require('../controller/product/findProduct')
+const createProducts = require('../controller/product/createProducts')
+const updateProduct = require('../controller/product/updateProduct')
 
 
 const resolvers = {
@@ -40,6 +45,18 @@ const resolvers = {
     // Gets a Section based on Section ID
     Section : async (root, { id }, context) => {
       let db_response = await findSection(id)
+      return db_response
+    },
+
+    // Gets Products
+    Products: async (root, { status }, context) => {
+      let db_response = await findAllProducts(status)
+      return db_response
+    },
+
+    // Gets Product
+    Product : async (root, { id, status}, context) => {
+      let db_response = await findProduct(id, status)
       return db_response
     }
 
@@ -93,7 +110,19 @@ const resolvers = {
     deleteSection: async (root, section, context) => {
       let db_response = await deleteSection(section)
       return db_response
-    }
+    },
+
+    // Add Product or Multiple Products
+    addProducts: async (root, { products }, context) => {
+      let db_response = await createProducts(products)
+      return db_response
+    },
+
+    // Update Product
+    updateProduct: async (root, { product }, context) => {
+      let db_response = await updateProduct(product)
+      return(db_response)
+    },
 
   }
 

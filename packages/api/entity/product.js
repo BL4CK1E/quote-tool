@@ -1,5 +1,8 @@
 module.exports = {
   name: "product",
+  uniques: [{
+    columns: ["sku"]
+  }],
   columns: {
     id : {
       primary: true,
@@ -7,29 +10,62 @@ module.exports = {
       generated: true
     },
     name : {
-      type: "varchar"
+      type: "varchar",
+      length: 150,
+      nullable: false
     },
     description: {
-      type: "varchar"
+      type: "varchar",
+      nullable: false,
+      default: ""
     },
     sku: {
-      type: "varchar"
+      type: "varchar",
+      nullable: false
     },
     mpn: {
-      type: "varchar"
+      type: "varchar",
+      nullable: false
     },
     cost: {
-      type: "float"
+      type: "decimal",
+      precision: 9,
+      scale: 2,
+      nullable: false,
+      default: 0.00
     },
     sell: {
-      type: "float"
+      type: "decimal",
+      precision: 9,
+      scale: 2,
+      nullable: false,
+      default: 0.00
     },
     rrp: {
-      type: "float"
+      type: "decimal",
+      precision: 9,
+      scale: 2,
+      nullable: false,
+      default: 0.00
     },
     recurring: {
-      type: "int", 
+      type: "int",
+      nullable: false,
       default: 1 // 1 = Upfront, 2 = Monthly, 3 = Annual
+    },
+    status: {
+      type: "int",
+      nullable: false,
+      default: 1 // 1 = Active, 2 = Inactive
     }
   }
 }
+
+/* 
+  == Relationship == Brainstorm ==
+
+    Products can have one Brand
+    Products can have one Vendor
+
+  == == == == == == == == == == ==
+*/
