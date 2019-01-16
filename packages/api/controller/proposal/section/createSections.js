@@ -1,5 +1,7 @@
 const getRepository = require('typeorm').getRepository
 
+const { SECTION } = require('../../../utilities/constants')
+
 const createSections = async (Section_Array, Proposal_Id) => {
 
     // Attaches Proposal_Id to each object within the Section Array
@@ -9,7 +11,7 @@ const createSections = async (Section_Array, Proposal_Id) => {
         return section
     }))
 
-    let sectionRepository = getRepository("section");
+    let sectionRepository = getRepository(SECTION);
     let result = await sectionRepository.save(sectionsToSave)
             .then( savedSection  => {
                 return savedSection

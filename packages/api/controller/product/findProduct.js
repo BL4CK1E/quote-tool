@@ -1,12 +1,14 @@
 const getRepository = require('typeorm').getRepository
 
+const { PRODUCT } = require('../../utilities/constants')
+
 const findProduct = async (id, status_flag) => {
 
     // 1 = Active = Default
     let status = 1 || status_flag
 
     // Only returns 
-    let productRepository = getRepository("product");
+    let productRepository = getRepository(PRODUCT);
     let result = await productRepository.findOneOrFail({ where: [ { id }, { status: status } ] })
             .then( async foundProduct  => {
                 return foundProduct

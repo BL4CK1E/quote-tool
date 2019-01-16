@@ -1,5 +1,7 @@
+const { PROPOSAL } = require('../utilities/constants')
+
 module.exports = {
-    name: "proposal",
+    name: PROPOSAL,
     columns: {
         id: {
             primary: true,

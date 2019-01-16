@@ -1,5 +1,7 @@
+const { SECTION } = require('../utilities/constants')
+
 module.exports = {
-    name: "section",
+    name: SECTION,
     columns: {
         id: {
             primary: true,

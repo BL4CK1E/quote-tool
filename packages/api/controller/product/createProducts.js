@@ -1,15 +1,15 @@
 const getRepository = require('typeorm').getRepository
 
+const { PRODUCT } = require('../../utilities/constants')
+
 const createProduct = async product => {
 
-    let productRepository = getRepository("product");
+    let productRepository = getRepository(PRODUCT);
     let result = await productRepository.save(product)
             .then( savedProducts  => {
                 return savedProducts
             })
-            .catch( err => {
-                console.log(err)
-                return err
+            .catch( () => {
                 throw new Error(`There was an issue saving sections.`)
             });
 

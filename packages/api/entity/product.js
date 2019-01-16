@@ -1,5 +1,7 @@
+const { PRODUCT } = require('../utilities/constants')
+
 module.exports = {
-  name: "product",
+  name: PRODUCT,
   uniques: [{
     columns: ["sku"]
   }],
@@ -60,12 +62,3 @@ module.exports = {
     }
   }
 }
-
-/* 
-  == Relationship == Brainstorm ==
-
-    Products can have one Brand
-    Products can have one Vendor
-
-  == == == == == == == == == == ==
-*/

@@ -1,8 +1,10 @@
 const getRepository = require('typeorm').getRepository
 
+const { SECTION } = require('../../../utilities/constants')
+
 const updateProposal = async sectionArray => {
 
-    let sectionRepository = getRepository("section")
+    let sectionRepository = getRepository(SECTION)
 
     // Iterate Through Array
       // INSIDE LOOP: Find Section, Update it and Save it Again

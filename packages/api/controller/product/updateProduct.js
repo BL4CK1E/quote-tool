@@ -1,8 +1,10 @@
 const getRepository = require('typeorm').getRepository
 
+const { PRODUCT } = require('../../utilities/constants')
+
 const updateproduct = async product => {
 
-    let productRepository = getRepository("product")
+    let productRepository = getRepository(PRODUCT)
     let result = await productRepository.findOneOrFail( { where: [{ id: product.id }] } )
             .then( async (foundProduct)  => {
 
@@ -20,6 +22,7 @@ const updateproduct = async product => {
             .catch( () => {
                 throw new Error(`There was an issue updating the product with an id of ${id}.`)
             })
+
     return result
 }
 

@@ -76,7 +76,7 @@ const insertMockData = async () => {
     rrp: 100.00
   }
 
-  await createProducts([product1, product2, product3, product4])
+  await createProducts([product1, product2, product3])
 
   console.log("[mockData.js] mock data inserted!")
 

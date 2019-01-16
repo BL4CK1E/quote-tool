@@ -1,8 +1,10 @@
 const getRepository = require('typeorm').getRepository
 
+const { SECTION } = require('../../../utilities/constants')
+
 const deleteSection = async section => {
 
-    let sectionRepository = getRepository("section");
+    let sectionRepository = getRepository(SECTION);
     let result = await sectionRepository.findOneOrFail({ where: [ { id: section.id } ] })
             .then( foundSection  => {
                 sectionRepository.delete(section.id)

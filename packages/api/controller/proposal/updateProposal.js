@@ -1,8 +1,10 @@
 const getRepository = require('typeorm').getRepository
 
+const { PROPOSAL } = require('../../utilities/constants')
+
 const updateProposal = async proposal => {
 
-    let proposalRepository = getRepository("proposal")
+    let proposalRepository = getRepository(PROPOSAL)
     let result = await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
             .then( async (foundProposal)  => {
 

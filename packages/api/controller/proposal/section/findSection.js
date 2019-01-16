@@ -1,5 +1,7 @@
 const getRepository = require('typeorm').getRepository
 
+const { SECTION } = require('../../../utilities/constants')
+
 /*
     Finds a Section, requires an ID.
     Not specific to a proposal.
@@ -7,7 +9,7 @@ const getRepository = require('typeorm').getRepository
 
 const findSection = async (id) => {
 
-    let sectionRepository = getRepository("section");
+    let sectionRepository = getRepository(SECTION);
     let result = await sectionRepository.findOneOrFail({ where: [ { id } ] })
             .then( foundSections  => {
                 return foundSections

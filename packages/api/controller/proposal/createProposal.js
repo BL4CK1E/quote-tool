@@ -1,10 +1,11 @@
 const getRepository = require('typeorm').getRepository
-
 const createSections = require('./section/createSections')
+
+const { PROPOSAL } = require('../../utilities/constants')
 
 const createProposal = async proposal => {
 
-    let proposalRepository = getRepository("proposal");
+    let proposalRepository = getRepository(PROPOSAL);
     let result = await proposalRepository.save(proposal)
             .then( async savedProposal  => {
 
