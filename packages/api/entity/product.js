@@ -1,64 +1,64 @@
-const { PRODUCT } = require('../utilities/constants')
+const { PRODUCT } = require('../utilities/constants');
 
 module.exports = {
   name: PRODUCT,
   uniques: [{
-    columns: ["sku"]
+    columns: ['sku'],
   }],
   columns: {
-    id : {
+    id: {
       primary: true,
-      type: "int",
-      generated: true
+      type: 'int',
+      generated: true,
     },
-    name : {
-      type: "varchar",
+    name: {
+      type: 'varchar',
       length: 150,
-      nullable: false
+      nullable: false,
     },
     description: {
-      type: "varchar",
+      type: 'varchar',
       nullable: false,
-      default: ""
+      default: '',
     },
     sku: {
-      type: "varchar",
-      nullable: false
+      type: 'varchar',
+      nullable: false,
     },
     mpn: {
-      type: "varchar",
-      nullable: false
+      type: 'varchar',
+      nullable: false,
     },
     cost: {
-      type: "decimal",
+      type: 'decimal',
       precision: 9,
       scale: 2,
       nullable: false,
-      default: 0.00
+      default: 0.00,
     },
     sell: {
-      type: "decimal",
+      type: 'decimal',
       precision: 9,
       scale: 2,
       nullable: false,
-      default: 0.00
+      default: 0.00,
     },
     rrp: {
-      type: "decimal",
+      type: 'decimal',
       precision: 9,
       scale: 2,
       nullable: false,
-      default: 0.00
+      default: 0.00,
     },
     recurring: {
-      type: "int",
+      type: 'int',
       nullable: false,
-      default: 1 // 1 = Upfront, 2 = Monthly, 3 = Annual
+      default: 1, // 1 = Upfront, 2 = Monthly, 3 = Annual
     },
     status: {
-      type: "int",
+      type: 'int',
       nullable: false,
-      default: 1 // 1 = Active, 2 = Inactive
-    }
-  }
-}
+      default: 1, // 1 = Active, 2 = Inactive
+    },
+  },
+};

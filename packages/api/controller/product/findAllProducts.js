@@ -1,23 +1,18 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { PRODUCT } = require('../../utilities/constants');
 
-const { PRODUCT } = require('../../utilities/constants')
+const findAllProducts = async (statusFlag) => {
+  // 1 = Active = Default
+  const status = statusFlag || 1;
 
-const findAllProducts = async (status_flag) => {
+  const productRepository = getRepository(PRODUCT);
+  const result = await productRepository.find({ where: [{ status }] })
+    .then(foundProducts => foundProducts)
+    .catch(() => {
+      throw new Error('There was an issue retrieving all products.');
+    });
 
-    // 1 = Active = Default
-    let status = status_flag || 1
+  return result;
+};
 
-    let productRepository = getRepository(PRODUCT);
-    let result = await productRepository.find({ where: [ { status } ] })
-            .then( foundProducts  => {
-                return foundProducts
-            })
-            .catch( () => {
-                throw new Error(`There was an issue retrieving all products.`)
-            });
-
-    return result
-
-}
-
-module.exports = findAllProducts
+module.exports = findAllProducts;

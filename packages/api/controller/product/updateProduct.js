@@ -1,29 +1,26 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { PRODUCT } = require('../../utilities/constants');
 
-const { PRODUCT } = require('../../utilities/constants')
+const updateproduct = async (product) => {
+  const productRepository = getRepository(PRODUCT);
+  const result = await productRepository.findOneOrFail({ where: [{ id: product.id }] })
+    .then(async (foundProduct) => {
+      // Make Changes
+      Object.keys(product).forEach((key) => {
+        foundProduct[key] = product[key];
+      });
 
-const updateproduct = async product => {
+      // Save Changes
+      await productRepository.save(foundProduct);
 
-    let productRepository = getRepository(PRODUCT)
-    let result = await productRepository.findOneOrFail( { where: [{ id: product.id }] } )
-            .then( async (foundProduct)  => {
+      // Find Changed Entry and Return It
+      return await productRepository.findOneOrFail({ where: [{ id: product.id }] });
+    })
+    .catch(() => {
+      throw new Error(`There was an issue updating the product with an id of ${id}.`);
+    });
 
-                // Make Changes
-                Object.keys(product).forEach( key => {
-                  foundProduct[key] = product[key]
-                })
+  return result;
+};
 
-                // Save Changes
-                await productRepository.save(foundProduct)
-
-                // Find Changed Entry and Return It
-                return await productRepository.findOneOrFail( { where: [{ id: product.id }] } )
-            })
-            .catch( () => {
-                throw new Error(`There was an issue updating the product with an id of ${id}.`)
-            })
-
-    return result
-}
-
-module.exports = updateproduct
+module.exports = updateproduct;
