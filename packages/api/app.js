@@ -1,38 +1,40 @@
-const express = require('express')
-const path = require('path')
+const express = require('express');
+const path = require('path');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser')
-const logger = require('morgan')
-const connection = require('./db/db')
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 // Apollo Imports
-const { ApolloServer } = require('apollo-server-express')
-const typeDefs = require('./types/index')
-const resolvers = require('./resolvers/index')
+const { ApolloServer } = require('apollo-server-express');
+const typeDefs = require('./types/index');
+const resolvers = require('./resolvers/index');
+
+// Database Connection
+const connection = require('./db/db');
 
 // Mock Data Function
-const insertMockData = require('./controller/mock/mockData')
+const insertMockData = require('./controller/mock/mockData');
 
 // Express Instance
-const app = express()
+const app = express();
 
 // Express Middleware
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// DB Connection
-connection()
-setTimeout(()=>{
-  insertMockData()
-}, 2000)
+// DB Connection & Mock Data Insertion
+connection();
+setTimeout(() => {
+  insertMockData();
+}, 2000);
 
 // Apollo Instance
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ typeDefs, resolvers });
 
 // Apollo Middleware
-server.applyMiddleware({ app, server, path: '/___gql'})
+server.applyMiddleware({ app, server, path: '/___gql' });
 
-module.exports = app
+module.exports = app;

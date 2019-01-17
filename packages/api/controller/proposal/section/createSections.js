@@ -1,28 +1,23 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { SECTION } = require('../../../utilities/constants');
 
-const createSections = async (Section_Array, Proposal_Id) => {
+const createSections = async (sectionArray, proposalId) => {
+  // Attaches Proposal_Id to each object within the Section Array
+  const sectionsToSave = await Promise.all(sectionArray.map((section, index) => {
+    const newSection = { ...section };
+    newSection.order = index + 1;
+    newSection.proposal_id = proposalId;
+    return newSection;
+  }));
 
-    // Attaches Proposal_Id to each object within the Section Array
-    let sectionsToSave = await Promise.all( Section_Array.map( (section, index) => { 
-        section.order = index + 1
-        section.proposal_id = Proposal_Id
-        return section
-    }))
+  const sectionRepository = getRepository(SECTION);
+  const result = await sectionRepository.save(sectionsToSave)
+    .then(savedSection => savedSection)
+    .catch(() => {
+      throw new Error('There was an issue saving sections.');
+    });
 
-    let sectionRepository = getRepository("section");
-    let result = await sectionRepository.save(sectionsToSave)
-            .then( savedSection  => {
-                return savedSection
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue saving the sections",
-                    err: err
-                }
-            });
+  return result;
+};
 
-    return result
-
-}
-
-module.exports = createSections
+module.exports = createSections;

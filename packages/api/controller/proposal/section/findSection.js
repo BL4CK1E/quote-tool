@@ -1,26 +1,20 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { SECTION } = require('../../../utilities/constants');
+
+const findSection = async (id) => {
+  const sectionRepository = getRepository(SECTION);
+  const result = await sectionRepository.findOneOrFail({ where: [{ id }] })
+    .then(foundSections => foundSections)
+    .catch(() => {
+      throw new Error(`There was an issue retrieving the section with an id of ${id}.`);
+    });
+
+  return result;
+};
+
+module.exports = findSection;
 
 /*
     Finds a Section, requires an ID.
     Not specific to a proposal.
 */
-
-const findSection = async (id) => {
-
-    let sectionRepository = getRepository("section");
-    let result = await sectionRepository.findOneOrFail({ where: [ { id } ] })
-            .then( foundSections  => {
-                return foundSections
-            })
-            .catch( err => {
-                return {
-                    message: `There was an issue retrieving section ${id}`,
-                    err: err
-                }
-            });
-
-    return result
-
-}
-
-module.exports = findSection

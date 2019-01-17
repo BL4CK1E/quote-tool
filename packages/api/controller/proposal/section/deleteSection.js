@@ -1,22 +1,19 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
 
-const deleteSection = async section => {
+const { SECTION } = require('../../../utilities/constants');
 
-    let sectionRepository = getRepository("section");
-    let result = await sectionRepository.findOneOrFail({ where: [ { id: section.id } ] })
-            .then( foundSection  => {
-                sectionRepository.delete(section.id)
-                return foundSection
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue with deleting the section",
-                    err: err
-                }
-            });
+const deleteSection = async (section) => {
+  const sectionRepository = getRepository(SECTION);
+  const result = await sectionRepository.findOneOrFail({ where: [{ id: section.id }] })
+    .then((foundSection) => {
+      sectionRepository.delete(section.id);
+      return foundSection;
+    })
+    .catch(() => {
+      throw new Error(`There was an issue deleting the section with an id of ${section.id}.`);
+    });
 
-    return result
+  return result;
+};
 
-}
-
-module.exports = deleteSection
+module.exports = deleteSection;

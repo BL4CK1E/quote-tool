@@ -1,20 +1,18 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { SECTION } = require('../../../utilities/constants');
 
-const updateProposal = async section => {
+const updateProposal = async (section) => {
+  const sectionRepository = getRepository(SECTION);
+  const options = { name: section.name, order: section.order };
+  const result = await sectionRepository.update(section.id, options)
+    .then(async () => {
+      const sectionProposal = await sectionRepository.findOne({ where: [{ id: section.id }] });
+      return sectionProposal;
+    })
+    .catch(() => {
+      throw new Error('There was an issue updating the section.');
+    });
+  return result;
+};
 
-    let sectionRepository = getRepository("section")
-    let result = await sectionRepository.update( section.id, { name: section.name, order: section.order })
-            .then( async ()  => {
-                let sectionProposal = await sectionRepository.findOne({ where: [ { id: section.id } ] })
-                return sectionProposal
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue with updating the proposal",
-                    err: err
-                }
-            })
-    return result
-}
-
-module.exports = updateProposal
+module.exports = updateProposal;

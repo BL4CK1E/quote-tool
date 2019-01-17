@@ -1,22 +1,20 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
 
-const deleteProposal = async proposal => {
+const { PROPOSAL } = require('../../utilities/constants');
 
-    let proposalRepository = getRepository("proposal");
-    let result = await proposalRepository.findOneOrFail({ where: [ { id: proposal.id }, { name: proposal.name } ] })
-            .then( foundProposal  => {
-                proposalRepository.delete(foundProposal.id)
-                return foundProposal
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue with deleting the proposal",
-                    err: err
-                }
-            });
+const deleteProposal = async (proposal) => {
+  const proposalRepository = getRepository(PROPOSAL);
+  const options = { where: [{ id: proposal.id }, { name: proposal.name }] };
+  const result = await proposalRepository.findOneOrFail(options)
+    .then((foundProposal) => {
+      proposalRepository.delete(foundProposal.id);
+      return foundProposal;
+    })
+    .catch(() => {
+      throw new Error(`There was an issue deleting the proposal with an id of ${proposal.id}.`);
+    });
 
-    return result
+  return result;
+};
 
-}
-
-module.exports = deleteProposal
+module.exports = deleteProposal;

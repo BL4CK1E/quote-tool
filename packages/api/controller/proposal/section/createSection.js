@@ -1,21 +1,15 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
 
-const createSection = async Section => {
+const { SECTION } = require('../../../utilities/constants');
 
-    let sectionRepository = getRepository("section");
-    let result = await sectionRepository.save(Section)
-            .then( savedSection  => {
-              console.log(savedSection)
-                return savedSection
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue saving the section",
-                    err: err
-                }
-            });
-    return result
+const createSection = async (Section) => {
+  const sectionRepository = getRepository(SECTION);
+  const result = await sectionRepository.save(Section)
+    .then(savedSection => savedSection)
+    .catch(() => {
+      throw new Error('There was an issue saving the section.');
+    });
+  return result;
+};
 
-}
-
-module.exports = createSection
+module.exports = createSection;
