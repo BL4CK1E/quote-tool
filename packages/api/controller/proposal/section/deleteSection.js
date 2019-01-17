@@ -1,4 +1,4 @@
-const getRepository = require('typeorm').getRepository;
+const { getRepository } = require('typeorm');
 
 const { SECTION } = require('../../../utilities/constants');
 
@@ -9,8 +9,8 @@ const deleteSection = async (section) => {
       sectionRepository.delete(section.id);
       return foundSection;
     })
-    .catch((err) => {
-      throw new Error(`There was an issue deleting the section with an id of ${id}.`);
+    .catch(() => {
+      throw new Error(`There was an issue deleting the section with an id of ${section.id}.`);
     });
 
   return result;

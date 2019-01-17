@@ -1,4 +1,4 @@
-const getRepository = require('typeorm').getRepository;
+const { getRepository } = require('typeorm');
 const createSections = require('./section/createSections');
 
 const { PROPOSAL } = require('../../utilities/constants');
@@ -6,11 +6,11 @@ const { PROPOSAL } = require('../../utilities/constants');
 const createProposal = async (proposal) => {
   const proposalRepository = getRepository(PROPOSAL);
   const result = await proposalRepository.save(proposal)
-    .then(async (savedProposal) => {
-      if (proposal.sections) {
-        savedProposal.sections = await createSections(proposal.sections, proposal.id);
+    .then(async (newProposal) => {
+      const savedProposal = { ...newProposal };
+      if (savedProposal.sections) {
+        savedProposal.sections = await createSections(savedProposal.sections, savedProposal.id);
       }
-
       return savedProposal;
     })
     .catch(() => {

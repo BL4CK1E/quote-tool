@@ -75,6 +75,12 @@ const typeDefs = gql`
     status: Int
   }
 
+  input MoveInput {
+    parentId: Int!
+    from: Int!
+    to: Int!
+  }
+
   # Mutations
   type Mutation {
 
@@ -86,6 +92,7 @@ const typeDefs = gql`
     # Section Mutations
     addSection( data: SectionInput ): Section
     updateSection( data: SectionInput ): Section
+    updateSectionOrder( data: MoveInput ): [Section] 
     deleteSection( id: Int! ): Section
 
     # Product Mutation

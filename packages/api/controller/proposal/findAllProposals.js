@@ -1,4 +1,4 @@
-const getRepository = require('typeorm').getRepository;
+const { getRepository } = require('typeorm');
 
 const { PROPOSAL } = require('../../utilities/constants');
 

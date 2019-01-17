@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 // Apollo Imports
 const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./types/index').default;
+const typeDefs = require('./types/index');
 const resolvers = require('./resolvers/index');
 
 // Database Connection
