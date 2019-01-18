@@ -1,6 +1,5 @@
 const { getRepository } = require('typeorm');
-
-const { SECTION } = require('../../../utilities/constants');
+const { SECTION } = require('../../utilities/constants');
 
 const deleteSection = async (section) => {
   const sectionRepository = getRepository(SECTION);

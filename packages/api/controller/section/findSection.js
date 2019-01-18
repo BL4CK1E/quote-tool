@@ -1,5 +1,5 @@
 const { getRepository } = require('typeorm');
-const { SECTION } = require('../../../utilities/constants');
+const { SECTION } = require('../../utilities/constants');
 
 const findSection = async (id) => {
   const sectionRepository = getRepository(SECTION);

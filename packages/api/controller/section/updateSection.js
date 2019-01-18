@@ -1,5 +1,5 @@
 const { getRepository } = require('typeorm');
-const { SECTION } = require('../../../utilities/constants');
+const { SECTION } = require('../../utilities/constants');
 
 const updateProposal = async (section) => {
   const sectionRepository = getRepository(SECTION);

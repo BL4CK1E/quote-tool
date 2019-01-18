@@ -32,7 +32,13 @@ setTimeout(() => {
 }, 2000);
 
 // Apollo Instance
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ res, req }) => ({
+    res, req,
+  }),
+});
 
 // Apollo Middleware
 server.applyMiddleware({ app, server, path: '/___gql' });

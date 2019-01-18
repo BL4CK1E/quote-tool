@@ -1,5 +1,4 @@
 const { getRepository } = require('typeorm');
-
 const { PROPOSAL } = require('../../utilities/constants');
 
 const deleteProposal = async (proposal) => {

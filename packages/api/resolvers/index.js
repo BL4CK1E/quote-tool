@@ -8,12 +8,12 @@ const updateProposal = require('../controller/proposal/updateProposal');
 const deleteProposal = require('../controller/proposal/deleteProposal');
 
 // Section Controller Imports
-const findAllSections = require('../controller/proposal/section/findSections');
-const findSection = require('../controller/proposal/section/findSection');
-const createSection = require('../controller/proposal/section/createSection');
-const updateSection = require('../controller/proposal/section/updateSection');
-const updateSectionOrder = require('../controller/proposal/section/updateSectionOrder');
-const deleteSection = require('../controller/proposal/section/deleteSection');
+const findAllSections = require('../controller/section/findSections');
+const findSection = require('../controller/section/findSection');
+const createSection = require('../controller/section/createSection');
+const updateSection = require('../controller/section/updateSection');
+const updateSectionOrder = require('../controller/section/updateSectionOrder');
+const deleteSection = require('../controller/section/deleteSection');
 
 // Product Controller Imports
 const findAllProducts = require('../controller/product/findAllProducts');
@@ -21,6 +21,9 @@ const findProduct = require('../controller/product/findProduct');
 const createProducts = require('../controller/product/createProducts');
 const updateProduct = require('../controller/product/updateProduct');
 
+// User Controller Imports
+const createUser = require('../controller/user/createUser');
+const authUser = require('../controller/user/authUser');
 
 const resolvers = {
 
@@ -132,6 +135,19 @@ const resolvers = {
     updateProduct: async (root, { product }, context) => {
       const dbresponse = await updateProduct(product);
       return (dbresponse);
+    },
+
+    // Create User (Register)
+    createUser: async (root, { data }, context) => {
+      const dbresponse = await createUser(data);
+      return (dbresponse);
+    },
+
+    // Auth User (Login), Sets Cookie
+    authUser: async (root, data, { res }) => {
+      const { token, authorisedUser } = await authUser(data);
+      res.cookie('auth', token, { httpOnly: true });
+      return (authorisedUser);
     },
 
   },

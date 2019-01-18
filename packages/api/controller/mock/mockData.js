@@ -1,5 +1,6 @@
 const createProposal = require('../proposal/createProposal');
 const createProducts = require('../product/createProducts');
+const createUser = require('../user/createUser');
 
 const insertMockData = async () => {
   const section1 = {
@@ -68,7 +69,15 @@ const insertMockData = async () => {
 
   await createProducts([product1, product2, product3]);
 
-  // console.log('[mockData.js] mock data inserted!');
+  const newUser1 = {
+    username: 'ctalke',
+    password: 'thisisapassword',
+    email: 'christopher.talke@gmail.com',
+    firstName: 'Christopher',
+    lastName: 'Talke',
+  };
+
+  await createUser(newUser1);
 };
 
 module.exports = insertMockData;

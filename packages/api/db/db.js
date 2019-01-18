@@ -5,6 +5,7 @@ const { createConnection, EntitySchema } = typeorm;
 const PRODUCT = require('../entity/product');
 const PROPOSAL = require('../entity/proposal');
 const SECTION = require('../entity/section');
+const USER = require('../entity/user');
 
 const connection = async () => {
   const db = await createConnection({
@@ -14,13 +15,14 @@ const connection = async () => {
     username: 'postgres' || 'quote_tool_write_read',
     password: 'postgres' || 'quote_tool',
     database: 'quoteTool',
-    // logging: ["query", "errors"],
+    // logging: ['query', 'errors'],
     dropSchema: true,
     synchronize: true,
     entities: [
       new EntitySchema(PRODUCT),
       new EntitySchema(PROPOSAL),
       new EntitySchema(SECTION),
+      new EntitySchema(USER),
     ],
   });
 

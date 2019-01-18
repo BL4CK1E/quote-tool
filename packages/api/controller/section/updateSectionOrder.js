@@ -1,6 +1,6 @@
 const { getRepository } = require('typeorm');
-const { SECTION } = require('../../../utilities/constants');
-const { immutableMove, immutablePropUpdate } = require('../../../utilities/utilities');
+const { SECTION } = require('../../utilities/constants');
+const { immutableMove, immutablePropUpdate } = require('../../utilities/utilities');
 
 const updateSectionOrder = async (proposalID, fromIndex, toIndex) => {
   const sectionRepository = getRepository(SECTION);

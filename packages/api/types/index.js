@@ -33,6 +33,16 @@ const typeDefs = gql`
     status: Int
   }
 
+  type User {
+    id: Int
+    username: String
+    email: String
+    firstName: String
+    lastName: String
+    auth: Int
+    status: Int
+  }
+
   # Queries
   type Query {
 
@@ -81,6 +91,14 @@ const typeDefs = gql`
     to: Int!
   }
 
+  input NewUserInput {
+    username: String!
+    password: String!
+    email: String!
+    firstName: String!
+    lastName: String!
+  }
+
   # Mutations
   type Mutation {
 
@@ -98,6 +116,10 @@ const typeDefs = gql`
     # Product Mutation
     addProducts( products: [ProductInput] ): [Product]
     updateProduct( product: ProductInput ): Product
+
+    # User Mutation
+    createUser( data: NewUserInput ): User
+    authUser( username: String!, password: String! ): User
 
   }
 
