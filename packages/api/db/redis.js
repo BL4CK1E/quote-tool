@@ -1,11 +1,8 @@
 /* eslint-disable no-console */
 const redis = require('redis');
+const { promisify } = require('util');
 
-// Create redis connection
-const client = redis.createClient();
+const RedisStore = redis.createClient();
+const getAsync = promisify(RedisStore.get).bind(RedisStore);
 
-client.on('error', (err) => {
-  console.log(`Error ${err}`);
-});
-
-module.exports = client;
+module.exports = { RedisStore, getAsync };

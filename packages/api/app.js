@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -9,10 +10,13 @@ const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./types/index');
 const resolvers = require('./resolvers/index');
 
-// Database Connection
+// Database Connection Import
 const connection = require('./db/db');
 
-// Mock Data Function
+// Redis Connection Import
+const { RedisStore, getAsync } = require('./db/redis');
+
+// Mock Data Function Import
 const insertMockData = require('./controller/mock/mockData');
 
 // Express Instance
@@ -31,13 +35,17 @@ setTimeout(() => {
   insertMockData();
 }, 2000);
 
+// Redis Connection
+RedisStore;
+
 // Apollo Instance
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ res, req }) => ({
-    res, req,
-  }),
+  context: async ({ res, req }) => {
+    const user = await getAsync(req.headers.auth || '');
+    return { res, req, user };
+  },
 });
 
 // Apollo Middleware

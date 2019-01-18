@@ -4,7 +4,7 @@
 
 const { getRepository } = require('typeorm');
 const jwt = require('jsonwebtoken');
-const client = require('../../db/redis');
+const RedisStore = require('../../db/redis');
 const { USER, SECRET } = require('../../utilities/constants');
 const { comparePassword } = require('../../utilities/utilities');
 
@@ -24,7 +24,7 @@ const authUser = async ({ username, password }) => {
         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7),
       });
       const token = await jwt.sign(payload, SECRET);
-      client.set(token, authorisedUser.id, 'EX', 60 * 60 * 24 * 7);
+      RedisStore.set(token, authorisedUser.id, 'EX', 60 * 60 * 24 * 7);
       // Strip Password
       delete authorisedUser.password;
       return { token, authorisedUser };
