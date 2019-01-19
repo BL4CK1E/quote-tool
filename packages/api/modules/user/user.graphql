@@ -1,0 +1,22 @@
+type User {
+    id: Int
+    username: String
+    email: String
+    firstName: String
+    lastName: String
+    auth: Int
+    status: Int
+}
+
+input NewUserInput {
+    username: String!
+    password: String!
+    email: String!
+    firstName: String!
+    lastName: String!
+}
+
+type Mutation {
+    authoriseUser( username: String!, password: String! ): User
+    registerUser( data: NewUserInput ): User
+}

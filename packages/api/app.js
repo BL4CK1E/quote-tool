@@ -7,8 +7,7 @@ const logger = require('morgan');
 
 // Apollo Imports
 const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./types/index');
-const resolvers = require('./resolvers/index');
+const genSchema = require('./utilities/generateSchema');
 
 // Database Connection Import
 const connection = require('./db/db');
@@ -40,8 +39,7 @@ RedisStore;
 
 // Apollo Instance
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: genSchema(),
   context: async ({ res, req }) => {
     const user = await getAsync(req.headers.auth || '');
     return { res, req, user };
