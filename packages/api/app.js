@@ -46,6 +46,7 @@ const server = new ApolloServer({
     const user = await getAsync(req.headers.auth || '');
     return { res, req, user };
   },
+  debug: false,
 });
 
 // Apollo Middleware

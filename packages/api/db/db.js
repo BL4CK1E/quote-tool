@@ -1,5 +1,4 @@
-const typeorm = require('typeorm');
-const { createConnection, EntitySchema } = typeorm;
+const { createConnection, EntitySchema } = require('typeorm');
 
 // Entity Import
 const PRODUCT = require('../entity/product');
@@ -12,8 +11,8 @@ const connection = async () => {
     type: 'postgres',
     host: 'localhost',
     port: 5432,
-    username: 'postgres' || 'quote_tool_write_read',
-    password: 'postgres' || 'quote_tool',
+    username: 'quote_tool_write_read',
+    password: 'quote_tool',
     database: 'quoteTool',
     // logging: ['query', 'errors'],
     dropSchema: true,
