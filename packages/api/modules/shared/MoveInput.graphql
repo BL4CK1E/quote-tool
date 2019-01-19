@@ -1,0 +1,5 @@
+input MoveInput {
+    parentId: Int!
+    from: Int!
+    to: Int!
+}

@@ -1,0 +1,51 @@
+
+type Product {
+    id: Int
+    name: String
+    description: String
+    sku: String
+    mpn: String
+    cost: Float
+    sell: Float
+    rrp: Float
+    "Recurring Values (Default: 1): 1 = Upfront  2 = Monthly 3 = Annual"
+    recurring: Int
+    "Status Flag (Default: 1): 1 = Active 2 = Inactive"
+    status: Int
+}
+
+# Queries
+type Query {
+
+    # Product Queries
+    Products( status: Int ): [Product]
+    Product( id: Int!, status: Int): Product
+
+}
+
+input ProductInput {
+    "Product ID: Required to find a product"
+    id: Int
+    "Product Name"
+    name: String
+    "Product Description"
+    description: String
+    sku: String
+    mpn: String
+    cost: Float 
+    sell: Float 
+    rrp: Float 
+    "Recurring Values (Default: 1): 1 = Upfront  2 = Monthly 3 = Annual "
+    recurring: Int
+    "Status Flag (Default: 1): 1 = Active 2 = Inactive"
+    status: Int
+}
+
+# Mutations
+type Mutation {
+
+    # Product Mutation
+    addProducts( products: [ProductInput] ): [Product]
+    updateProduct( product: ProductInput ): Product
+
+}

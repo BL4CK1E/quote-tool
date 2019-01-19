@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev-setup": "cd ./packages/api && npm install && cd ../doc && npm install",
     "eslint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
   },
   "devDependencies": {
