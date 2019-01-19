@@ -1,16 +1,14 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { PROPOSAL } = require('../../utilities/constants');
 
 const findProposal = async (id) => {
+  const proposalRepository = getRepository(PROPOSAL);
+  const result = await proposalRepository.findOneOrFail({ where: [{ id }] })
+    .then(async foundProposal => foundProposal)
+    .catch(() => {
+      throw new Error(`There was an issue finding proposal with an id of ${id}.`);
+    });
+  return result;
+};
 
-    let proposalRepository = getRepository("proposal");
-    let result = await proposalRepository.findOneOrFail({ where: [ { id } ] })
-            .then( async foundProposal  => {
-                return foundProposal
-            })
-            .catch( () => {
-                throw new Error(`There was an issue finding proposal with an id of ${id}.`)
-            });
-    return result
-}
-
-module.exports = findProposal
+module.exports = findProposal;

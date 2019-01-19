@@ -1,28 +1,22 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const createSections = require('../section/createSections');
+const { PROPOSAL } = require('../../utilities/constants');
 
-const createSections = require('./section/createSections')
+const createProposal = async (proposal) => {
+  const proposalRepository = getRepository(PROPOSAL);
+  const result = await proposalRepository.save(proposal)
+    .then(async (newProposal) => {
+      const savedProposal = { ...newProposal };
+      if (savedProposal.sections) {
+        savedProposal.sections = await createSections(savedProposal.sections, savedProposal.id);
+      }
+      return savedProposal;
+    })
+    .catch(() => {
+      throw new Error('There was an issue saving the proposal.');
+    });
 
-const createProposal = async proposal => {
+  return result;
+};
 
-    let proposalRepository = getRepository("proposal");
-    let result = await proposalRepository.save(proposal)
-            .then( async savedProposal  => {
-
-                if (!!proposal.sections) {
-                    savedProposal.sections  = await createSections(proposal.sections, proposal.id)
-                }
-
-                return savedProposal
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue saving the proposal",
-                    err: err
-                }
-            });
-
-    return result
-
-}
-
-module.exports = createProposal
+module.exports = createProposal;

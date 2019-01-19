@@ -1,30 +1,27 @@
-const getRepository = require('typeorm').getRepository
+const { getRepository } = require('typeorm');
+const { PROPOSAL } = require('../../utilities/constants');
 
-const updateProposal = async proposal => {
+const updateProposal = async (proposal) => {
+  const proposalRepository = getRepository(PROPOSAL);
+  const result = await proposalRepository.findOneOrFail({ where: [{ id: proposal.id }] })
+    .then(async (foundProposal) => {
+      // Shallow Obj Copy
+      const updatedProposal = { ...foundProposal };
+      // Make Changes
+      Object.keys(proposal).forEach((key) => {
+        updatedProposal[key] = proposal[key];
+      });
 
-    console.log(proposal)
+      // Save Changes
+      await proposalRepository.save(updatedProposal);
 
-    let proposalRepository = getRepository("proposal")
-    let result = await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
-            .then( async (foundProposal)  => {
+      // Find Changed Entry and Return It
+      return proposalRepository.findOneOrFail({ where: [{ id: proposal.id }] });
+    })
+    .catch(() => {
+      throw new Error(`There was an issue updating the proposal with an id of ${proposal.id}.`);
+    });
+  return result;
+};
 
-                // Make Changes
-                foundProposal.name = proposal.name
-                foundProposal.description = proposal.description
-
-                // Save Changes
-                await proposalRepository.save(foundProposal)
-
-                // Find Changed Entry and Return It
-                return await proposalRepository.findOneOrFail( { where: [{ id: proposal.id }] } )
-            })
-            .catch( err => {
-                return {
-                    message: "There was an issue with updating the proposal",
-                    err: err
-                }
-            })
-    return result
-}
-
-module.exports = updateProposal
+module.exports = updateProposal;
