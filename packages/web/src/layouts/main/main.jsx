@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
@@ -18,30 +19,39 @@ class MainLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: ['Dashboard', 'Proposals', 'Companies', 'Products', 'Templates', 'Settings'],
-      active: 'Dashboard',
+      items: [{
+        name: 'Dashboard',
+        path: '/',
+      }, {
+        name: 'Proposals',
+        path: '/proposals',
+      }, {
+        name: 'Companies',
+        path: '/companies',
+      }, {
+        name: 'Products',
+        path: '/products',
+      }, {
+        name: 'Templates',
+        path: '/templates',
+      }, {
+        name: 'Settings',
+        path: '/settings',
+      }],
     };
-    this.navigationChange = this.navigationChange.bind(this);
-  }
-
-  navigationChange(e) {
-    e.stopPropagation();
-    this.setState({
-      active: e.target.innerText,
-    });
   }
 
   renderNavBtns() {
-    const { items, active } = this.state;
+    const { items } = this.state;
+    const { pathname } = window.location;
     return items.map((item, index) => {
-      const isActive = (item === active);
-      const isBottom = (item === 'Settings');
+      const isActive = (item.path === pathname);
+      const isBottom = (item.name === 'Settings');
       return (
         <div key={`${item}-${index * 400}`}>
-          <Link to={`/${item.toLowerCase()}/`}>
+          <Link to={item.path}>
             <NavigationBtn
-              onClick={this.navigationChange}
-              name={item}
+              name={item.name}
               active={isActive}
               bottom={isBottom}
             />
