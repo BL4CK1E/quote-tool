@@ -3,7 +3,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import StyledCollapseBtn from './styled';
+import { StyledCollapseBtn } from './styled';
 
 export default function CollapseBtn(props) {
   const { onClick, isCollapsed } = props;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledMainLayout = styled.div`
   height:100vh;
   display: grid;
-  grid-template-rows: 75px 1fr;
+  grid-template-rows: 50px 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   justify-items: stretch;

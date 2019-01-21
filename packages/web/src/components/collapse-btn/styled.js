@@ -22,4 +22,17 @@ const StyledCollapseBtn = styled.div`
 
 `;
 
-export default StyledCollapseBtn;
+const StyledSubMenuCollapseBtn = styled(StyledCollapseBtn)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+  height: 35px;
+  border: none;
+  padding: 0 10px;
+`;
+
+export {
+  StyledCollapseBtn,
+  StyledSubMenuCollapseBtn,
+};

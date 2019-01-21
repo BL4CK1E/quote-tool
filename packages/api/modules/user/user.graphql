@@ -16,7 +16,12 @@ input NewUserInput {
     lastName: String!
 }
 
+type Query {
+    findUser: User
+}
+
 type Mutation {
     authoriseUser( username: String!, password: String! ): User
+    deauthoriseUser: User
     registerUser( data: NewUserInput ): User
 }

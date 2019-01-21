@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { ApolloConsumer } from 'react-apollo';
 
 import { StyledMainLayout, StyledMainLayoutContent } from './styled';
 
@@ -51,7 +52,6 @@ class MainLayout extends Component {
 
   componentDidMount() {
     const SAVED_STATE = (localStorage.getItem('nav_isCollapsed') === 'true');
-    console.log(SAVED_STATE);
     this.setState({
       isCollapsed: SAVED_STATE,
     });
@@ -63,7 +63,6 @@ class MainLayout extends Component {
     this.setState({
       isCollapsed: !isCollapsed,
     });
-    console.log(!isCollapsed);
     window.localStorage.setItem('nav_isCollapsed', !isCollapsed);
   }
 
@@ -93,15 +92,19 @@ class MainLayout extends Component {
     const { children } = this.props;
     const { isCollapsed } = this.state;
     return (
-      <StyledMainLayout isCollapsed={isCollapsed}>
-        <Navigation isCollapsed={isCollapsed}>
-          <NavigationLogo isCollapsed={isCollapsed} />
-          <CollapseBtn onClick={this.toggleCollapse} isCollapsed={isCollapsed} />
-          { this.renderNavBtns() }
-        </Navigation>
-        <Header> . </Header>
-        <StyledMainLayoutContent>{ children }</StyledMainLayoutContent>
-      </StyledMainLayout>
+      <ApolloConsumer>
+        {client => (
+          <StyledMainLayout isCollapsed={isCollapsed}>
+            <Navigation isCollapsed={isCollapsed}>
+              <NavigationLogo isCollapsed={isCollapsed} />
+              <CollapseBtn onClick={this.toggleCollapse} isCollapsed={isCollapsed} />
+              { this.renderNavBtns() }
+            </Navigation>
+            <Header client={client} />
+            <StyledMainLayoutContent>{ children }</StyledMainLayoutContent>
+          </StyledMainLayout>
+        )}
+      </ApolloConsumer>
     );
   }
 }

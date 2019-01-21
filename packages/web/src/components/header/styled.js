@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledHeader = styled.div`
-  height:75px;
+  height:50px;
   background: white;
   position: relative;
   border-bottom: 1px solid #E0E0E0;
