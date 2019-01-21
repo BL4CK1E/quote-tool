@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 const express = require('express');
 const path = require('path');
@@ -36,18 +37,27 @@ setTimeout(() => {
 
 // Redis Connection
 RedisStore;
+RedisStore.flushdb((err) => {
+  if (err) console.log('>>> Issue with clearing Redis DB');
+  console.log('>>> Succesfully cleared Redis DB');
+});
 
 // Apollo Instance
 const server = new ApolloServer({
   schema: genSchema(),
   context: async ({ res, req }) => {
-    const user = await getAsync(req.headers.auth || '');
+    const user = await getAsync(req.cookies.auth || '');
     return { res, req, user };
   },
   debug: false,
 });
 
+// Cors Options
+const corsOptions = { credentials: true, origin: 'http://localhost:3005', allowedHeaders: ['Content-Type', 'Authorization'] };
+
 // Apollo Middleware
-server.applyMiddleware({ app, server, path: '/___gql' });
+server.applyMiddleware({
+  app, path: '/___gql', cors: corsOptions,
+});
 
 module.exports = app;

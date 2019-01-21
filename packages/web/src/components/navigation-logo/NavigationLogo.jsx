@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 
 import React from 'react';
-import StyledNavigationLogo from './styled';
+import StyledHeading from './styled';
 
 export default function NavigationLogo(props) {
-  // eslint-disable-next-line react/prop-types
-  const { img } = props;
+  const { isCollapsed } = props;
   return (
-    <StyledNavigationLogo src={img} />
+    <StyledHeading isCollapsed={isCollapsed}>Proposify</StyledHeading>
   );
 }

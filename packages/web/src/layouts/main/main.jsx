@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom';
 
 import { StyledMainLayout, StyledMainLayoutContent } from './styled';
 
-import Logo from './logo.PNG';
-
 import Navigation from '../../components/navigation/Navigation';
 import NavigationLogo from '../../components/navigation-logo/NavigationLogo';
 import NavigationBtn from '../../components/navigation-btn/NavigationBtn';
 import Header from '../../components/header/Header';
+import CollapseBtn from '../../components/collapse-btn/CollapseBtn';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -22,27 +21,54 @@ class MainLayout extends Component {
       items: [{
         name: 'Dashboard',
         path: '/',
+        icon: 'home',
       }, {
         name: 'Proposals',
         path: '/proposals',
+        icon: 'paper-plane',
       }, {
         name: 'Companies',
         path: '/companies',
+        icon: 'building',
       }, {
         name: 'Products',
         path: '/products',
+        icon: 'box',
       }, {
         name: 'Templates',
         path: '/templates',
+        icon: 'file',
       }, {
         name: 'Settings',
         path: '/settings',
+        icon: 'cog',
       }],
+      isCollapsed: false,
     };
+
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+  }
+
+  componentDidMount() {
+    const SAVED_STATE = (localStorage.getItem('nav_isCollapsed') === 'true');
+    console.log(SAVED_STATE);
+    this.setState({
+      isCollapsed: SAVED_STATE,
+    });
+  }
+
+
+  toggleCollapse() {
+    const { isCollapsed } = this.state;
+    this.setState({
+      isCollapsed: !isCollapsed,
+    });
+    console.log(!isCollapsed);
+    window.localStorage.setItem('nav_isCollapsed', !isCollapsed);
   }
 
   renderNavBtns() {
-    const { items } = this.state;
+    const { items, isCollapsed } = this.state;
     const { pathname } = window.location;
     return items.map((item, index) => {
       const isActive = (item.path === pathname);
@@ -52,8 +78,10 @@ class MainLayout extends Component {
           <Link to={item.path}>
             <NavigationBtn
               name={item.name}
+              icon={item.icon}
               active={isActive}
               bottom={isBottom}
+              isCollapsed={isCollapsed}
             />
           </Link>
         </div>
@@ -63,10 +91,12 @@ class MainLayout extends Component {
 
   render() {
     const { children } = this.props;
+    const { isCollapsed } = this.state;
     return (
-      <StyledMainLayout>
-        <Navigation>
-          <NavigationLogo img={Logo} />
+      <StyledMainLayout isCollapsed={isCollapsed}>
+        <Navigation isCollapsed={isCollapsed}>
+          <NavigationLogo isCollapsed={isCollapsed} />
+          <CollapseBtn onClick={this.toggleCollapse} isCollapsed={isCollapsed} />
           { this.renderNavBtns() }
         </Navigation>
         <Header> . </Header>

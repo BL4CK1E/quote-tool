@@ -7,9 +7,9 @@ import NavigationWrapper from './styled';
 
 class Navigation extends Component {
   render() {
-    const { children } = this.props;
+    const { children, isCollapsed } = this.props;
     return (
-      <NavigationWrapper>
+      <NavigationWrapper isCollapsed={isCollapsed}>
         { children }
       </NavigationWrapper>
     );

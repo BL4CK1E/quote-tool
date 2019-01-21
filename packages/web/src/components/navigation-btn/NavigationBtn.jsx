@@ -1,19 +1,37 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import NavigationBtnWrp from './styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavigationBtmBtnWrp, NavigationBtnWrp } from './styled';
 
 const NavigationBtn = (props) => {
   const {
     name,
+    icon,
     active,
     bottom,
+    isCollapsed,
     onClick,
   } = props;
 
-  return (
-    <NavigationBtnWrp onClick={onClick} active={active} bottom={bottom}>
-      { name }
-    </NavigationBtnWrp>);
+  return (bottom ? (
+    <NavigationBtmBtnWrp
+      name={name}
+      onClick={onClick}
+      active={active}
+      isCollapsed={isCollapsed}
+    >
+      {(isCollapsed ? <FontAwesomeIcon icon={icon} /> : name)}
+    </NavigationBtmBtnWrp>
+  ) : (
+    <NavigationBtnWrp
+      name={name}
+      onClick={onClick}
+      active={active}
+      isCollapsed={isCollapsed}
+    >
+      {(isCollapsed ? <FontAwesomeIcon icon={icon} /> : name)}
+    </NavigationBtnWrp>)
+  );
 };
 
 export default NavigationBtn;

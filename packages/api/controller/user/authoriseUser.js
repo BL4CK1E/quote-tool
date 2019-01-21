@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable no-else-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable brace-style */
 
 const { getRepository } = require('typeorm');
 const jwt = require('jsonwebtoken');
-const RedisStore = require('../../db/redis');
+const { RedisStore } = require('../../db/redis');
 const { USER, SECRET } = require('../../utilities/constants');
 const { comparePassword } = require('../../utilities/utilities');
 
@@ -24,7 +25,10 @@ const authUser = async ({ username, password }) => {
         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7),
       });
       const token = await jwt.sign(payload, SECRET);
-      RedisStore.set(token, authorisedUser.id, 'EX', 60 * 60 * 24 * 7);
+      RedisStore.set(token, authorisedUser.id, 'EX', 60 * 60 * 24 * 7, (err) => {
+        if (err) console.log('>>> Issue with saving Token');
+        console.log('>>> Token saved');
+      });
       // Strip Password
       delete authorisedUser.password;
       return { token, authorisedUser };
@@ -32,7 +36,6 @@ const authUser = async ({ username, password }) => {
     .catch(() => {
       throw new Error('There was an issue authenticating this user.');
     });
-
   return result;
 };
 

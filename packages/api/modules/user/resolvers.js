@@ -6,7 +6,7 @@ const resolvers = {
 
     authoriseUser: async (_, data, { res }) => {
       const { token, authorisedUser } = await authoriseUser(data);
-      res.cookie('auth', token, { httpOnly: true });
+      res.cookie('auth', token, { maxAge: 900000, httpOnly: true });
       return (authorisedUser);
     },
 

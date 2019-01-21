@@ -10,6 +10,6 @@ const Header = (props) => {
       { children }
     </StyledHeader>
   );
-}
+};
 
 export default Header;
