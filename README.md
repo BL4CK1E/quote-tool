@@ -93,3 +93,20 @@ $ npm start
 - App Authorisation
   - Login
   - Logout
+
+## Memories
+This section is resevered for any major screw ups (...data loss), or achievements (... bugs that couldn't be fixed), hopefully not too much gets added to this!
+
+
+***22-01-2019 - Merged like a total GIT*** 
+
+After a hard day working on this codebase, I got plenty of work done! With some time to kill at my in-laws I decided it would be an ideal time to add some information to this README to help other people with setting up a Dev environment shoult they ever want to help (... likely scenario).
+
+Anyway - I decided create another branch, and then merged this into the master branch without commiting any previous changes! ... IDIOT! Even worse, I then decided to delete old stashes, which were actually the uncommited changes I had been working on all day today...
+
+Luckily I came across this post that advised on how to recover from auto-stashes: 
+
+
+- https://stackoverflow.com/questions/89332/how-to-recover-a-dropped-stash-in-git
+
+Anyway I managed to recover the stash, created a new branch, commited my files to it and then updated the README and the rest of the files / folder structure I was setting up! LUCKY!
