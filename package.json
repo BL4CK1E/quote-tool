@@ -4,7 +4,6 @@
     "eslint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.6",
@@ -13,8 +12,5 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "nodemon": "^1.18.9"
-  },
-  "dependencies": {
-    "i": "^0.3.6"
   }
 }
