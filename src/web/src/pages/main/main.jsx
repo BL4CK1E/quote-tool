@@ -1,9 +1,6 @@
 /* eslint-disable no-undef */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
-
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ApolloConsumer } from 'react-apollo';
 
@@ -19,49 +16,55 @@ class MainLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [{
-        name: 'Dashboard',
-        path: '/',
-        icon: 'home',
-      }, {
-        name: 'Proposals',
-        path: '/proposals',
-        icon: 'paper-plane',
-      }, {
-        name: 'Companies',
-        path: '/companies',
-        icon: 'building',
-      }, {
-        name: 'Products',
-        path: '/products',
-        icon: 'box',
-      }, {
-        name: 'Templates',
-        path: '/templates',
-        icon: 'file',
-      }, {
-        name: 'Settings',
-        path: '/settings',
-        icon: 'cog',
-      }],
-      isCollapsed: false,
+      items: [
+        {
+          name: 'Dashboard',
+          path: '/',
+          icon: 'home'
+        },
+        {
+          name: 'Proposals',
+          path: '/proposals',
+          icon: 'paper-plane'
+        },
+        {
+          name: 'Companies',
+          path: '/companies',
+          icon: 'building'
+        },
+        {
+          name: 'Products',
+          path: '/products',
+          icon: 'box'
+        },
+        {
+          name: 'Templates',
+          path: '/templates',
+          icon: 'file'
+        },
+        {
+          name: 'Settings',
+          path: '/settings',
+          icon: 'cog'
+        }
+      ],
+      isCollapsed: false
     };
 
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
   componentDidMount() {
-    const SAVED_STATE = (localStorage.getItem('nav_isCollapsed') === 'true');
+    const SAVED_STATE = localStorage.getItem('nav_isCollapsed') === 'true';
     this.setState({
-      isCollapsed: SAVED_STATE,
+      isCollapsed: SAVED_STATE
     });
   }
-
 
   toggleCollapse() {
     const { isCollapsed } = this.state;
     this.setState({
-      isCollapsed: !isCollapsed,
+      isCollapsed: !isCollapsed
     });
     window.localStorage.setItem('nav_isCollapsed', !isCollapsed);
   }
@@ -70,8 +73,8 @@ class MainLayout extends Component {
     const { items, isCollapsed } = this.state;
     const { pathname } = window.location;
     return items.map((item, index) => {
-      const isActive = (item.path === pathname);
-      const isBottom = (item.name === 'Settings');
+      const isActive = item.path === pathname;
+      const isBottom = item.name === 'Settings';
       return (
         <div key={`${item}-${index * 400}`}>
           <Link to={item.path}>
@@ -97,16 +100,24 @@ class MainLayout extends Component {
           <StyledMainLayout isCollapsed={isCollapsed}>
             <Navigation isCollapsed={isCollapsed}>
               <Logo size="16px" isCollapsed={isCollapsed} />
-              <CollapseBtn onClick={this.toggleCollapse} isCollapsed={isCollapsed} />
-              { this.renderNavBtns() }
+              <CollapseBtn
+                onClick={this.toggleCollapse}
+                isCollapsed={isCollapsed}
+              />
+              {this.renderNavBtns()}
             </Navigation>
             <Header client={client} />
-            <StyledMainLayoutContent>{ children }</StyledMainLayoutContent>
+            <StyledMainLayoutContent>{children}</StyledMainLayoutContent>
           </StyledMainLayout>
         )}
       </ApolloConsumer>
     );
   }
 }
+
+// Prop Types
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default MainLayout;

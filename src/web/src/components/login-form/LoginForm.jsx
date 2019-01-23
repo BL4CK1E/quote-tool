@@ -9,7 +9,9 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 
 import StyledLoginForm from './styled';
+import Label from '../label/Label';
 import Input from '../input/Input';
+import Button from '../button/Button';
 
 const LOGIN_USER = gql`
   mutation LoginUser($username: String!, $password: String!) {
@@ -54,10 +56,12 @@ class LoginForm extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <StyledLoginForm onSubmit={this.handleLogin}>
+      <StyledLoginForm id="login-form" onSubmit={this.handleLogin}>
+        <Label value="Username" targetField="username" isRequired />
         <Input type="text" onChange={this.handleInput} value={username} name="username" id="username" />
+        <Label value="Password" targetField="username" isRequired />
         <Input type="password" onChange={this.handleInput} value={password} name="password" id="password" />
-        <Input type="submit" value="Login" />
+        <Button primary center width="200px" name="login-button" type="submit" form="login-form" value="Log in" />
       </StyledLoginForm>
     );
   }

@@ -12,11 +12,15 @@ export default function Input(props) {
     id,
     onChange,
     placeholder,
+    compact,
+    width
   } = props;
   return (
     <StyledInput
+      compact={compact}
       type={type}
       value={value}
+      width={width}
       name={name}
       placeholder={placeholder}
       id={id}

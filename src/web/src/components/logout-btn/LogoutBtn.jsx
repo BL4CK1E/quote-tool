@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 
 import HeaderAccountSubMenuBtn from '../header/header-account-submenu-btn/HeaderAccountSubMenuBtn';
@@ -24,18 +25,25 @@ class LogoutBtn extends Component {
   handleLogout(e) {
     e.preventDefault();
     const { client } = this.props;
-    client.mutate({ mutation: LOGOUT_USER })
+    client
+      .mutate({ mutation: LOGOUT_USER })
       .then(() => {
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
 
   render() {
     return (
-      <HeaderAccountSubMenuBtn type="button" value="Log Out" onClick={this.handleLogout} />
+      <Link to="/">
+        <HeaderAccountSubMenuBtn
+          type="button"
+          value="Log Out"
+          onClick={this.handleLogout}
+        />
+      </Link>
     );
   }
 }

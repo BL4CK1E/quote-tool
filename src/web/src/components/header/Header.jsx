@@ -4,7 +4,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { getCurrentUser } from '../../graphql';
+import { GET_CURRENT_USER } from '../../graphql/user';
 
 import HeaderAccountWrapper from './header-account-wrapper/HeaderAccountWrapper';
 import HeaderAccountImage from './header-account-img/HeaderAccountImg';
@@ -18,15 +18,15 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCollapsed: false,
+      isCollapsed: false
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  handleToggle(){
+  handleToggle() {
     const { isCollapsed } = this.state;
     this.setState({
-      isCollapsed: !isCollapsed,
+      isCollapsed: !isCollapsed
     });
   }
 
@@ -34,17 +34,25 @@ class Header extends Component {
     const { isCollapsed } = this.state;
     const { client } = this.props;
     return (
-      <Query query={getCurrentUser}>
-        {() => (<StyledHeader>
-          <HeaderAccountWrapper>
-            <HeaderAccountImage name="test" />
-            <SubMenuCollapseBtn onClick={this.handleToggle} isCollapsed={isCollapsed} />
-            <HeaderAccountSubMenu isCollapsed={isCollapsed}>
-              <LogoutBtn client={client} />
-            </HeaderAccountSubMenu>
-          </HeaderAccountWrapper>
-        </StyledHeader>
-        )}
+      <Query query={GET_CURRENT_USER}>
+        {({ data }) => {
+          const user = data.findUser;
+          return (
+            <StyledHeader>
+              <HeaderAccountWrapper>
+                <HeaderAccountImage name="test" />
+                <SubMenuCollapseBtn
+                  onClick={this.handleToggle}
+                  isCollapsed={isCollapsed}
+                />
+                <HeaderAccountSubMenu isCollapsed={isCollapsed}>
+                  <div className="activeUser">{`${user.firstName} ${user.lastName}`}</div>
+                  <LogoutBtn client={client} />
+                </HeaderAccountSubMenu>
+              </HeaderAccountWrapper>
+            </StyledHeader>
+          );
+        }}
       </Query>
     );
   }
