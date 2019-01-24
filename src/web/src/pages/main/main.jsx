@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ApolloConsumer } from 'react-apollo';
-
 import { StyledMainLayout, StyledMainLayoutContent } from './styled';
 
 import Navigation from '../../components/navigation/Navigation';
@@ -47,8 +46,7 @@ class MainLayout extends Component {
           path: '/settings',
           icon: 'cog'
         }
-      ],
-      isCollapsed: false
+      ]
     };
 
     this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -71,9 +69,9 @@ class MainLayout extends Component {
 
   renderNavBtns() {
     const { items, isCollapsed } = this.state;
-    const { pathname } = window.location;
     return items.map((item, index) => {
-      const isActive = item.path === pathname;
+      const currentPath = window.location.pathname.split('/').splice(1, 1);
+      const isActive = item.path === `/${currentPath}`;
       const isBottom = item.name === 'Settings';
       return (
         <div key={`${item}-${index * 400}`}>

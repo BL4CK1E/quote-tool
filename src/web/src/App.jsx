@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { GET_CURRENT_USER } from './graphql/user';
+import { GET_CURRENT_USER } from './graphql/modules/user';
 import './App.css';
 
 import Loader from './components/loader/Loader';
@@ -28,7 +28,9 @@ class App extends Component {
   componentDidMount() {
     const { client } = this.props;
     client
-      .query({ query: GET_CURRENT_USER })
+      .query({
+        query: GET_CURRENT_USER
+      })
       .then(res => {
         const { findUser } = res.data;
         this.updateAuthorization(true, false, findUser, null);

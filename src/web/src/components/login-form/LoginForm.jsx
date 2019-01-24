@@ -6,30 +6,20 @@
 /* eslint-disable react/no-unused-state */
 
 import React, { Component } from 'react';
-import gql from 'graphql-tag';
-
+import { LOGIN_USER } from '../../graphql/modules/user';
 import StyledLoginForm from './styled';
 import Label from '../label/Label';
 import Input from '../input/Input';
 import Button from '../button/Button';
 
-const LOGIN_USER = gql`
-  mutation LoginUser($username: String!, $password: String!) {
-    authoriseUser(username: $username, password: $password) {
-      id
-    }
-  }
-`;
-
 class LoginForm extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       username: 'ctalke',
       password: 'thisisapassword',
-      error: '',
+      error: ''
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -44,24 +34,47 @@ class LoginForm extends Component {
     e.preventDefault();
     const { client } = this.props;
     const { username, password } = this.state;
-    client.mutate({ mutation: LOGIN_USER, variables: { username, password } })
+    client
+      .mutate({ mutation: LOGIN_USER, variables: { username, password } })
       .then(() => {
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
 
   render() {
     const { username, password } = this.state;
+    console.log(this.props);
     return (
       <StyledLoginForm id="login-form" onSubmit={this.handleLogin}>
         <Label value="Username" targetField="username" isRequired />
-        <Input type="text" onChange={this.handleInput} value={username} name="username" id="username" />
+        <Input
+          type="text"
+          onChange={this.handleInput}
+          value={username}
+          name="username"
+          id="username"
+        />
+        {console.log(this.props)}
         <Label value="Password" targetField="username" isRequired />
-        <Input type="password" onChange={this.handleInput} value={password} name="password" id="password" />
-        <Button primary center width="200px" name="login-button" type="submit" form="login-form" value="Log in" />
+        <Input
+          type="password"
+          onChange={this.handleInput}
+          value={password}
+          name="password"
+          id="password"
+        />
+        <Button
+          primary
+          center
+          width="200px"
+          name="login-button"
+          type="submit"
+          form="login-form"
+          value="Log in"
+        />
       </StyledLoginForm>
     );
   }

@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable react/prop-types */
 /* eslint-disable space-before-blocks */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { GET_CURRENT_USER } from '../../graphql/user';
+import { GET_CURRENT_USER } from '../../graphql/modules/user';
 
 import HeaderAccountWrapper from './header-account-wrapper/HeaderAccountWrapper';
 import HeaderAccountImage from './header-account-img/HeaderAccountImg';
@@ -46,7 +47,9 @@ class Header extends Component {
                   isCollapsed={isCollapsed}
                 />
                 <HeaderAccountSubMenu isCollapsed={isCollapsed}>
-                  <div className="activeUser">{`${user.firstName} ${user.lastName}`}</div>
+                  <div className="activeUser">{`${user.firstName} ${
+                    user.lastName
+                  }`}</div>
                   <LogoutBtn client={client} />
                 </HeaderAccountSubMenu>
               </HeaderAccountWrapper>

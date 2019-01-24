@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 import StyledDashboard from './styled';
 import Card from '../../../components/card/Card';
 import Logo from '../../../components/logo/Logo';
-import { GET_CURRENT_USER } from '../../../graphql/user';
+import { GET_CURRENT_USER } from '../../../graphql/modules/user';
 
 class Dashboard extends Component {
   render() {

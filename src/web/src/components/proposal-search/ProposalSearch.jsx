@@ -9,8 +9,13 @@ export default class ProposalSearch extends Component {
     return (
       <StyledProposalSearch>
         <div>
-          <Label value="Search for a proposal" />
-          <Input compact placeholder="Proposal Number, Name, Company, Status" />
+          <Label targetField="proposal-search" value="Search for a proposal" />
+          <Input
+            name="proposal-search"
+            id="proposal-search"
+            compact
+            placeholder="Proposal Number, Name, Company, Status"
+          />
         </div>
       </StyledProposalSearch>
     );

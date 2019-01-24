@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 // Apollo Imports
-import { ApolloClient } from 'apollo-boost';
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import defaults from './defaults/defaults';
+import resolvers from './graphql/resolvers';
+import defaults from './graphql/defaults';
+import typeDefs from './graphql/typedefs';
 
 // Front Awesome Imports
 import FA from './components/fontAwesome/FontAwesome';
@@ -21,20 +21,10 @@ import * as serviceWorker from './serviceWorker';
 // GraphQL Apolli Client Setup & Init
 const GQL_URI = `http://${process.env.REACT_APP_API_URL}/___gql`;
 
-const cache = new InMemoryCache();
-
-const link = createHttpLink({
-  uri: GQL_URI,
-  credentials: 'include'
-});
-
 const client = new ApolloClient({
-  cache,
-  link,
   uri: GQL_URI,
-  clientState: {
-    defaults
-  }
+  credentials: 'include',
+  clientState: { defaults, resolvers, typeDefs }
 });
 
 // Font Awesome Init
