@@ -18,8 +18,10 @@ import FA from './components/fontAwesome/FontAwesome';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+console.log(process.env)
+
 // GraphQL Apolli Client Setup & Init
-const GQL_URI = `http://${process.env.REACT_APP_API_URL}/___gql`;
+const GQL_URI = `http://${process.env.REACT_APP_API_URL || 'localhost:3000'}/___gql`;
 
 const client = new ApolloClient({
   uri: GQL_URI,
