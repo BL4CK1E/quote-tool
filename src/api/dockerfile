@@ -1,0 +1,25 @@
+FROM node:10.15
+
+# Change working directory
+WORKDIR /usr/src/api
+
+# Update packages and install dependency packages for services
+RUN apt-get update \
+  && apt-get install -y build-essential \
+  && apt-get install -y python \
+  && apt-get dist-upgrade -y \
+  && apt-get clean \
+  && echo 'Finished installing dependencies'
+
+# Copy App into Working Dir
+COPY . .
+
+# Install npm production packages 
+RUN npm install bcrypt
+RUN npm install --production
+
+ENV NODE_ENV production
+ENV PORT 3000
+EXPOSE 3000
+
+CMD ["npm", "start"]
