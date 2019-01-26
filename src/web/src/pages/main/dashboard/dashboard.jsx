@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import React, { Component } from "react";
+import { Query } from "react-apollo";
 
-import StyledDashboard from './styled';
-import Card from '../../../components/card/Card';
-import Logo from '../../../components/logo/Logo';
-import { GET_CURRENT_USER } from '../../../graphql/modules/user';
+import StyledDashboard from "./styled";
+import Card from "../../../components/card/Card";
+import Logo from "../../../components/logo/Logo";
+import { GET_CURRENT_USER } from "../../../graphql/modules/user";
 
 class Dashboard extends Component {
   render() {
@@ -17,7 +17,7 @@ class Dashboard extends Component {
             return (
               <Card padding="100px 0">
                 <h2>Hi {user.firstName}, Welcome To</h2>
-                <Logo white size="50px" className="alpha" />
+                <Logo white size="50px" />
               </Card>
             );
           }}

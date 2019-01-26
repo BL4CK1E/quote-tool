@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import Table from "../table/Table";
 
@@ -15,20 +17,32 @@ export default class ProposalTable extends Component {
   }
 
   generateTableRows() {
-    const Proposals = this.props.proposals.Proposals;
-    Proposals.map((data, index) => {
-      console.log(data);
-    });
+    const { proposals } = this.props;
+    if (proposals) {
+      return proposals.map(data => {
+        const cellData = Object.keys(data).map(cell => {
+          if (cell === "name") {
+            return (
+              <td>
+                <Link to={`/proposals/edit/${data.id}`}>{data[cell]}</Link>
+              </td>
+            );
+          }
+          return <td>{data[cell]}</td>;
+        });
+        return <tr>{cellData}</tr>;
+      });
+    }
+    return <td span="6">No Data</td>;
   }
 
   render() {
-    const { children } = this.props;
     return (
       <Table>
         <thead>
           <tr>{this.generateTableHeaders()}</tr>
         </thead>
-        {this.generateTableRows()}
+        <tbody>{this.generateTableRows()}</tbody>
       </Table>
     );
   }

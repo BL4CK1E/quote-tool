@@ -3,7 +3,6 @@ const createProducts = require("../product/createProducts");
 const createUser = require("../user/createUser");
 
 const insertMockData = async () => {
-  
   const section1 = {
     name: "Section_1",
     order: 1,
@@ -35,7 +34,11 @@ const insertMockData = async () => {
     sections: [section1, section2, section3, section4]
   };
 
-  await createProposal(proposal);
+  const proposals = [];
+
+  for (let i = 0; i < 25; i++) {
+    createProposal(proposal);
+  }
 
   const product1 = {
     name: "Monthly Management - Endpoint Device",

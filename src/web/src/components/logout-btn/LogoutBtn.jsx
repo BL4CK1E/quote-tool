@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import gql from "graphql-tag";
 
-import HeaderAccountSubMenuBtn from '../header/header-account-submenu-btn/HeaderAccountSubMenuBtn';
+import HeaderAccountSubMenuBtn from "../header/header-account-submenu-btn/HeaderAccountSubMenuBtn";
 
 const LOGOUT_USER = gql`
   mutation LogoutUser {

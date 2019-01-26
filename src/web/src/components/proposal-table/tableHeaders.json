@@ -1,15 +1,25 @@
 {
-    "headers" : [{
-        "name": "Proposal #"
-    },{
-        "name": "Title"
-    },{
-        "name": "Customer"
-    },{
-        "name": "Owner"
-    },{
-        "name": "Status"
-    },{
-        "name": "Value"
-    }]
+  "headers": [
+    {
+      "name": "Proposal #"
+    },
+    {
+      "name": "Title"
+    },
+    {
+      "name": "Date"
+    },
+    {
+      "name": "Customer"
+    },
+    {
+      "name": "Owner"
+    },
+    {
+      "name": "Status"
+    },
+    {
+      "name": "Value"
+    }
+  ]
 }
