@@ -1,31 +1,43 @@
 /* eslint-disable no-undef */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
 // Apollo Imports
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import resolvers from './graphql/resolvers';
-import defaults from './graphql/defaults';
-import typeDefs from './graphql/typedefs';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import resolvers from "./graphql/resolvers";
+import defaults from "./graphql/defaults";
+import typeDefs from "./graphql/typedefs";
 
 // Front Awesome Imports
-import FA from './components/fontAwesome/FontAwesome';
+import FA from "./components/fontAwesome/FontAwesome";
 
 // Component Imports
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-console.log(process.env)
+let API_URL = "";
+
+switch (process.env.NODE_ENV) {
+  case "production":
+    // API_URL = "public_uri";
+    API_URL = "localhost:3000";
+    break;
+  case "development":
+    API_URL = "localhost:3000";
+    break;
+  default:
+    API_URL = "localhost:3000";
+}
 
 // GraphQL Apolli Client Setup & Init
-const GQL_URI = `http://${process.env.REACT_APP_API_URL || 'localhost:3000'}/___gql`;
+const GQL_URI = `http://${API_URL}/___gql`;
 
 const client = new ApolloClient({
   uri: GQL_URI,
-  credentials: 'include',
+  credentials: "include",
   clientState: { defaults, resolvers, typeDefs }
 });
 
@@ -36,7 +48,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <App client={client} />
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

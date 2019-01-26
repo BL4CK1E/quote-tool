@@ -1,20 +1,20 @@
 # Import Node for Building React
-FROM node:10:15 as builder
+FROM node:10.15 as builder
 WORKDIR /usr/src/web
 RUN apt-get update \
   && apt-get dist-upgrade -y \
   && apt-get clean \
   && echo 'Finished installing dependencies'
-COPY package*.json ./
+COPY . .
 RUN npm install
-RUN npm install react-scripts -g
-COPY . /usr/src/web
-CMD ["npm", "build"]
+RUN npm install react-scripts
+RUN npm run build
 
 # Import NGINX
-FROM nginx:1.13.9-alpine
+FROM nginx
 RUN rm -rf /etc/nginx/conf.d
-COPY conf /etc/nginx
+COPY ./conf /etc/nginx
 COPY --from=builder /usr/src/web/build /usr/share/nginx/html
+RUN ls /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
