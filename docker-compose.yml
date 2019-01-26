@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  redis:
+    image: "redis:alpine"
+    networks:
+      - backend
+    volumes:
+      - ./proposify-vol/redis:/data
+  db:
+    image: "postgres"
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: proposify
+      PGDATA: /home/postgresql/data/pgdata
+    volumes:
+      - ./proposify-vol/db:/var/lib/postgresql/data/pgdata
+  api:
+    build: "./src/api"
+    restart: always
+    networks:
+      - backend
+      - frontend
+    environment:
+      REDIS_CONNECTION: redis
+      POSTGRES_CONNECTION: db
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: proposify
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - db
+  web:
+    build: "./src/web"
+    networks:
+      - frontend
+    ports:
+      - 3005:80
+    depends_on:
+      - api
+
+volumes:
+  proposify-vol:
+
+networks:
+  backend:
+    internal: true
+  frontend:
