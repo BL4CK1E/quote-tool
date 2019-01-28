@@ -4,8 +4,11 @@ import { Query } from "react-apollo";
 import StyledProposalsWrapper from "./styled";
 
 import Card from "../../../components/card/Card";
+import CardHead from "../../../components/card/cardHead/CardHead";
+import Button from "../../../components/button/Button";
 import ProposalSearch from "../../../components/proposal-search/ProposalSearch";
 import ProposalTable from "../../../components/proposal-table/proposalTable";
+import Modal from "../../../components/modal/Modal";
 
 import { GET_PROPOSALS } from "../../../graphql/modules/proposal";
 
@@ -29,18 +32,28 @@ class Proposals extends Component {
     const { search } = this.state;
     return (
       <Query query={GET_PROPOSALS}>
-        {({ _, __, data }) => (
-          <StyledProposalsWrapper>
-            <Card padding="15px">
-              <strong>Proposals</strong>
-              <ProposalSearch
-                search={search}
-                handleSearch={this.handleSearch}
-                handleSubmit={this.handleSubmit}
-              />
-              <ProposalTable proposals={data} />
-            </Card>
-          </StyledProposalsWrapper>
+        {({ data }) => (
+          <>
+            <StyledProposalsWrapper>
+              <Card padding="15px">
+                <CardHead>
+                  <div>
+                    <strong>Proposals</strong>
+                  </div>
+                  <div>
+                    <Button slim value="Create Proposal" />
+                  </div>
+                </CardHead>
+                <ProposalSearch
+                  search={search}
+                  handleSearch={this.handleSearch}
+                  handleSubmit={this.handleSubmit}
+                />
+                <ProposalTable proposals={data.Proposals} />
+              </Card>
+            </StyledProposalsWrapper>
+            <Modal>test</Modal>
+          </>
         )}
       </Query>
     );
