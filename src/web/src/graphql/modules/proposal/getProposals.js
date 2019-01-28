@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_PROPOSALS = gql`
   {
@@ -6,6 +6,14 @@ export const GET_PROPOSALS = gql`
       id
       name
       createdAt
+      company
+      owner {
+        id
+        firstName
+        lastName
+      }
+      status
+      value
     }
   }
 `;

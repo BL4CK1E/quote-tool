@@ -9,10 +9,10 @@ const deleteProposal = require('../../controller/proposal/deleteProposal');
 
 const findAllSections = require('../../controller/section/findSections');
 
+const findUser = require('../../controller/user/findUser');
+
 const resolvers = {
-
   Query: {
-
     // Find All Proposals
     Proposals: async (_, __, { user }) => {
       if (user === null) throw new Error('Not Authorised!');
@@ -25,13 +25,11 @@ const resolvers = {
       if (user === null) throw new Error('Not Authorised!');
       const dbresponse = await findProposal(id);
       return dbresponse;
-    },
-
+    }
   },
 
   // Proposal Child Queries
   Proposal: {
-
     // Gets Sections based on Parent Proposal ID
     sections: async ({ id }, { user }) => {
       if (user === null) throw new Error('Not Authorised!');
@@ -39,10 +37,14 @@ const resolvers = {
       return dbresponse;
     },
 
+    owner: async ({ owner }, { user }) => {
+      if (user === null) throw new Error('Not Authorised!');
+      const dbresponse = await findUser(owner);
+      return dbresponse;
+    }
   },
 
   Mutation: {
-
     // Create One Proposal
     addProposal: async (_, proposal, { user }) => {
       if (user === null) throw new Error('Not Authorised!');
@@ -62,9 +64,8 @@ const resolvers = {
       if (user === null) throw new Error('Not Authorised!');
       const dbrespones = await deleteProposal(proposal);
       return dbrespones;
-    },
-  },
-
+    }
+  }
 };
 
 module.exports = resolvers;

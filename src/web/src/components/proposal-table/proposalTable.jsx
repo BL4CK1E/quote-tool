@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import Table from "../table/Table";
+import Table from '../table/Table';
 
-import tableHeaders from "./tableHeaders.json";
+import tableHeaders from './tableHeaders.json';
 
 export default class ProposalTable extends Component {
   generateTableHeaders() {
@@ -21,19 +22,23 @@ export default class ProposalTable extends Component {
     if (proposals) {
       return proposals.map(data => {
         const cellData = Object.keys(data).map(cell => {
-          if (cell === "name") {
+          if (cell === 'name') {
             return (
-              <td>
+              <td key={`tbody-row-${data[cell]}`}>
                 <Link to={`/proposals/edit/${data.id}`}>{data[cell]}</Link>
               </td>
             );
           }
-          return <td>{data[cell]}</td>;
+          return <td key={`tbody-row-${data[cell]}`}> {data[cell]} </td>;
         });
-        return <tr>{cellData}</tr>;
+        return <tr key={`tbody-row-${data.id}`}>{cellData}</tr>;
       });
     }
-    return <td span="6">No Data</td>;
+    return (
+      <tr>
+        <td span="6">No Data</td>
+      </tr>
+    );
   }
 
   render() {

@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import StyledButton from "./styled";
+import React from 'react';
+import PropTypes from 'prop-types';
+import StyledButton from './styled';
 
 export default function Button({
   value,
@@ -8,6 +8,7 @@ export default function Button({
   type,
   primary,
   secondary,
+  onClick,
   width,
   form,
   disabled,
@@ -20,6 +21,7 @@ export default function Button({
       type={type}
       form={form}
       disabled={disabled}
+      onClick={onClick}
       width={width}
       autoFocus={autofocus}
       slim={slim}
@@ -32,6 +34,7 @@ export default function Button({
 }
 
 Button.propTypes = {
+  onClick: PropTypes.func,
   value: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
@@ -45,11 +48,12 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  value: "Button",
-  name: "#",
-  type: "Button",
-  form: "#",
-  width: "auto",
+  onClick: () => {},
+  value: 'Button',
+  name: '#',
+  type: 'Button',
+  form: '#',
+  width: 'auto',
   slim: false,
   primary: false,
   secondary: false,

@@ -109,3 +109,5 @@ packages/*/typings/
 ### Docker Container Volume Paths
 docker/*
 docker
+proposify-vol/*
+proposify

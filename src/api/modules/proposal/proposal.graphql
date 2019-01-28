@@ -1,19 +1,27 @@
 type Proposal {
-    id: Int
-    name: String
-    description: String 
-    createdAt: String
-    updatedAt: String
-    sections: [Section]
+  id: Int
+  name: String
+  description: String
+  status: Int
+  company: Int
+  value: Int
+  createdAt: String
+  updatedAt: String
+  owner: User
+  sections: [Section]
 }
 
 type Query {
-    Proposals: [Proposal]
-    Proposal( id: Int! ): Proposal
+  Proposals: [Proposal]
+  Proposal(id: Int!): Proposal
 }
 
 type Mutation {
-    addProposal( name: String!, description: String, sections: [SectionInput]): Proposal
-    updateProposal( id: Int!, name: String, description: String ) : Proposal
-    deleteProposal( id: Int!, name: String! ): Proposal
+  addProposal(
+    name: String!
+    description: String
+    sections: [SectionInput]
+  ): Proposal
+  updateProposal(id: Int!, name: String, description: String): Proposal
+  deleteProposal(id: Int!, name: String!): Proposal
 }
