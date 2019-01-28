@@ -1,0 +1,3 @@
+import { GET_PROPOSALS, GET_PROPOSALS_OPTIONS } from "./getProposals";
+
+export { GET_PROPOSALS, GET_PROPOSALS_OPTIONS };
