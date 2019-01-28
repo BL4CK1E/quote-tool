@@ -23,5 +23,8 @@
     "pg": "^7.7.1",
     "redis": "^2.8.0",
     "typeorm": "^0.2.11"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }

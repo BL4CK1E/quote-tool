@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledProposalsWrapper = styled.div`
   position: relative;
@@ -17,17 +17,28 @@ const StyledProposalsWrapper = styled.div`
   & table tbody tr td {
     text-align: left;
     align-items: center;
-    padding: 0 10px;
     height: 30px;
     font-size: 12px;
+  }
+
+  & table thead tr th,
+  & table tbody tr td {
+    padding: 0 5px;
   }
 
   & table tbody tr td a {
     color: #2d9cdb;
   }
 
+  & table tbody tr {
+    height: 45px;
+    transition: all 0.1s;
+  }
+
   & table tbody tr:hover {
     background: #fbfbfb;
+    transform: scale(1.01);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   }
 
   /*  Sizings */
@@ -38,7 +49,7 @@ const StyledProposalsWrapper = styled.div`
 
   & table thead tr th:nth-of-type(2),
   & table tbody tr td:nth-of-type(2) {
-    width: 50%;
+    width: 40%;
   }
 
   & table thead tr th:nth-of-type(3),
@@ -47,10 +58,10 @@ const StyledProposalsWrapper = styled.div`
     width: 250px;
   }
 
-  & table thead tr th:nth-of-type(6),
-  & table tbody tr td:nth-of-type(6) {
+  & table thead tr th:nth-of-type(7),
+  & table tbody tr td:nth-of-type(7) {
     width: 200px;
-    justify-content: flex-end;
+    text-align: right;
   }
 `;
 
