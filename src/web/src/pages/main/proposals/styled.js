@@ -32,7 +32,6 @@ const StyledProposalsWrapper = styled.div`
 
   & table tbody tr {
     height: 45px;
-    transition: all 0.1s;
   }
 
   & table tbody tr:hover {

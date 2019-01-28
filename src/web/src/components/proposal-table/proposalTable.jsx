@@ -1,11 +1,13 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
 
-import Table from '../table/Table';
-
-import tableHeaders from './tableHeaders.json';
-import renderTableData from './tableData/ProposalDataHOC';
+import React, { Component } from "react";
+import Table from "../table/Table";
+import tableHeaders from "./tableHeaders.json";
+import renderTableData from "./tableData/ProposalDataHOC";
 
 export default class ProposalTable extends Component {
   generateTableHeaders() {
@@ -21,6 +23,7 @@ export default class ProposalTable extends Component {
     const { proposals } = this.props;
     if (proposals) {
       return proposals.map(data => {
+        delete data.__typename;
         const cellData = Object.keys(data).map(cell => (
           <td key={`tbody-row-${cell}`}>
             {renderTableData(data, cell, data[cell])}
