@@ -1,10 +1,11 @@
-const { getRepository } = require('typeorm');
-const { USER } = require('../../utilities/constants');
+const { getRepository } = require("typeorm");
+const { USER } = require("../../utilities/constants");
 
-const findUser = async (id) => {
+const findUser = async id => {
   const userRepository = getRepository(USER);
-  const result = await userRepository.findOneOrFail({ where: [{ id }] })
-    .then(async (foundUser) => {
+  const result = await userRepository
+    .findOneOrFail({ where: [{ id }] })
+    .then(async foundUser => {
       // Shallow Copy Obj
       const authorisedUser = { ...foundUser };
       delete authorisedUser.password;

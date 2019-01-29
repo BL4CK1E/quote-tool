@@ -2,9 +2,7 @@ const { createConnection, EntitySchema } = require("typeorm");
 const { DB_VARIABLES } = require("../config/config");
 
 // Entity Import
-const PRODUCT = require("../entity/product");
-const PROPOSAL = require("../entity/proposal");
-const SECTION = require("../entity/section");
+const USER = require("../entity/user");
 
 // Connection Setup
 const connection = async () => {
@@ -17,11 +15,7 @@ const connection = async () => {
     database: DB_VARIABLES.database,
     dropSchema: true,
     synchronize: true,
-    entities: [
-      new EntitySchema(PRODUCT),
-      new EntitySchema(PROPOSAL),
-      new EntitySchema(SECTION)
-    ]
+    entities: [new EntitySchema(USER)]
   });
   return db;
 };
