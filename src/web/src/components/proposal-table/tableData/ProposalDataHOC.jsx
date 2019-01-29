@@ -1,43 +1,30 @@
-/* eslint-disable radix */
-/* eslint-disable no-case-declarations */
-/* eslint-disable react/jsx-one-expression-per-line */
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import genDate from '../../../utils/genDate';
+import ProposalStatus from '../../proposal-status/ProposalStatus';
 
-// eslint-disable-next-line consistent-return
 const renderTableData = (parent, key, value) => {
+  let finalValue;
   switch (key) {
-    case "name":
-      return <Link to={`/proposals/edit/${parent.id}`}>{value}</Link>;
-    case "owner":
-      return `${value.firstName}  ${value.lastName}`;
-    case "company":
-      return `Ogavah P/L`;
-    case "createdAt":
-      // eslint-disable-next-line no-case-declarations
-      const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ];
-      const date = new Date(parseInt(value));
-      return `${date.getDay()} ${
-        months[date.getMonth()]
-      } ${date.getFullYear()} `;
-    case "__typename":
+    case 'name':
+      finalValue = <Link to={`/proposals/edit/${parent.id}`}>{value}</Link>;
+      break;
+    case 'owner':
+      finalValue = `${value.firstName}  ${value.lastName}`;
+      break;
+    case 'company':
+      finalValue = `Ogavah P/L`;
+      break;
+    case 'createdAt':
+      finalValue = genDate(value);
+      break;
+    case 'status':
+      finalValue = <ProposalStatus status={value} />;
       break;
     default:
-      return value;
+      finalValue = value;
   }
+  return finalValue;
 };
 
 export default renderTableData;

@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import StyledProposalsWrapper from './styled';
 
+import Loader from '../../../components/loader/Loader';
 import Card from '../../../components/card/Card';
 import CardHead from '../../../components/card/cardHead/CardHead';
+import CardBody from '../../../components/card/cardBody/CardBody';
 import Button from '../../../components/button/Button';
 import ProposalSearch from '../../../components/proposal-search/ProposalSearch';
 import ProposalTable from '../../../components/proposal-table/proposalTable';
@@ -31,38 +33,46 @@ class Proposals extends Component {
 
   handleSubmit() {}
 
-  handleModal() {
-    let { modalIsVisible } = this.state;
-    modalIsVisible = !modalIsVisible;
-    this.setState({ modalIsVisible });
+  handleModal(e) {
+    if (e.target !== this) {
+      let { modalIsVisible } = this.state;
+      modalIsVisible = !modalIsVisible;
+      this.setState({ modalIsVisible });
+    }
   }
 
   render() {
     const { search, modalIsVisible } = this.state;
     return (
       <Query query={GET_PROPOSALS}>
-        {({ data }) => (
+        {({ loading, data }) => (
           <>
             <StyledProposalsWrapper>
-              <Card padding="15px">
+              <Card>
                 <CardHead>
-                  <div>
+                  <div className="card-heading">
                     <strong>Proposals</strong>
                   </div>
                   <div>
                     <Button
                       slim
-                      value="Create Proposal"
+                      value="New Proposal"
                       onClick={this.handleModal}
                     />
                   </div>
                 </CardHead>
-                <ProposalSearch
-                  search={search}
-                  handleSearch={this.handleSearch}
-                  handleSubmit={this.handleSubmit}
-                />
-                <ProposalTable proposals={data.Proposals} />
+                <CardBody>
+                  <ProposalSearch
+                    search={search}
+                    handleSearch={this.handleSearch}
+                    handleSubmit={this.handleSubmit}
+                  />
+                  {loading ? (
+                    <Loader />
+                  ) : (
+                    <ProposalTable proposals={data.Proposals} />
+                  )}
+                </CardBody>
               </Card>
             </StyledProposalsWrapper>
             <Modal hidden={modalIsVisible} closeModal={this.handleModal}>

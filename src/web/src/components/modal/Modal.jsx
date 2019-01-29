@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StyledModal from './styled';
+import {
+  StyledModal,
+  StyledModalBackground,
+  StyledModalContent
+} from './styled';
 
 export default function Modal({ children, closeModal, hidden }) {
   return (
-    <StyledModal hidden={hidden} onClick={closeModal}>
-      {children}
+    <StyledModal hidden={hidden}>
+      <StyledModalBackground className="background" onClick={closeModal} />
+      <StyledModalContent className="content">{children}</StyledModalContent>
     </StyledModal>
   );
 }

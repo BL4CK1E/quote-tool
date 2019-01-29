@@ -8,12 +8,20 @@ const StyledModal = styled.div`
   height: 100%;
   width: 100%;
 
-  background: rgba(0, 0, 0, 0.75);
-
   display: ${props => (props.hidden ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export default StyledModal;
+const StyledModalBackground = styled.div`
+  background: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  width: 100%;
+`;
+
+const StyledModalContent = styled.div`
+  position: absolute;
+`;
+
+export { StyledModal, StyledModalBackground, StyledModalContent };

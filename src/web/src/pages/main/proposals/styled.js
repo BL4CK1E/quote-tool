@@ -4,6 +4,12 @@ const StyledProposalsWrapper = styled.div`
   position: relative;
   height: 100%;
 
+  & .card-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   & table {
     border-spacing: 0;
   }
@@ -36,8 +42,6 @@ const StyledProposalsWrapper = styled.div`
 
   & table tbody tr:hover {
     background: #fbfbfb;
-    transform: scale(1.01);
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   }
 
   /*  Sizings */

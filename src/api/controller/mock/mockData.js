@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const faker = require('faker');
 const createProposal = require('../proposal/createProposal');
 const createProducts = require('../product/createProducts');
 const createUser = require('../user/createUser');
-
 const insertMockData = async () => {
   const section1 = {
     name: 'Section_1',
@@ -27,19 +28,22 @@ const insertMockData = async () => {
     proposal_id: 1
   };
 
-  const proposal = {
-    name: 'Proposal 1',
-    description:
-      'The first proposal, this is just for mocking the database insertion',
-    owner: 1,
-    company: 1,
-    sections: [section1, section2, section3, section4]
-  };
+  const proposals = [];
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < 25; i++) {
-    createProposal(proposal);
+  for (let i = 0; i < 20; i++) {
+    const proposal = {
+      name: faker.random.words(),
+      description:
+        'The first proposal, this is just for mocking the database insertion',
+      owner: 1,
+      company: 1,
+      sections: [section1, section2, section3, section4]
+    };
+    proposals.push(proposal);
   }
+
+  createProposal(proposals);
 
   const product1 = {
     name: 'Monthly Management - Endpoint Device',

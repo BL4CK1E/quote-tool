@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const StyledProposalSearch = styled.div`
   margin: 15px 0;
+  margin-top: 0;
 
   div {
     display: flex;

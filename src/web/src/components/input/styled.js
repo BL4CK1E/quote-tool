@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const StyledInput = styled.input`
   padding: ${props => (props.compact ? '5px 10px' : '10px 15px')};
   margin: 5px 0;
+  box-sizing: border-box;
   width: ${props => (props.width ? props.width : 'auto')};
   font-size: ${props => (props.compact ? '13px' : '16px')};
   outline-offset: none;

@@ -4,10 +4,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 
-import React, { Component } from "react";
-import Table from "../table/Table";
-import tableHeaders from "./tableHeaders.json";
-import renderTableData from "./tableData/ProposalDataHOC";
+import React, { Component } from 'react';
+import Table from '../table/Table';
+import tableHeaders from './tableHeaders.json';
+import renderTableData from './tableData/ProposalDataHOC';
 
 export default class ProposalTable extends Component {
   generateTableHeaders() {
