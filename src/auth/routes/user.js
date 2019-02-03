@@ -13,7 +13,6 @@ router.get("/find", async (req, res, next) => {
 // Create User
 router.post("/create", async (req, res, next) => {
   const dbresponse = await createUser(req.body);
-  console.log(dbresponse);
   res.json(dbresponse);
 });
 
